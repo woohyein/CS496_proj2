@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_y="500pt"
+    tools:context=".CSCal.CSCalFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:fontFamily="casual"
+        android:gravity="center_horizontal"
+        android:text="@string/welcome_to_cs_calculator"
+        android:textAllCaps="false"
+        android:textColor="#275793"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="200dp"
+        android:fontFamily="monospace"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="numeral system"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:backgroundTint="#4C82B4"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="113dp"
+        android:layout_marginBottom="100dp"
+        android:fontFamily="monospace"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="bitwise operation"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#4C82B4"
+        tools:ignore="HardcodedText" />
+
+</RelativeLayout>
