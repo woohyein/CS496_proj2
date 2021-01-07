@@ -40,6 +40,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         TextView nameView, numView;
         ImageButton callButton;
 
+
         ViewHolder(View itemView) {
             // Init Views and Button
             super(itemView);
