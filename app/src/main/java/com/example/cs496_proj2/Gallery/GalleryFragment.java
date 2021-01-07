@@ -2,6 +2,7 @@ package com.example.cs496_proj2.Gallery;
 
 import android.app.Activity;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -113,24 +114,41 @@ public class GalleryFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == CAPTURE_PHOTO) {
-                Bundle bundle = data.getExtras();
-                Bitmap bitmap = (Bitmap) bundle.get("data");
-                Uri ChangedUri = BitmapToUri(this.requireContext(), bitmap);
-                FileList.add(new ImageUnit(ChangedUri));
+        if (data != null){
+            if (resultCode == Activity.RESULT_OK) {
+                if (requestCode == CAPTURE_PHOTO) {
+                    /*Uri selectredUri = data.getParcelableExtra("uri");
+                    if (selectredUri != null){
+                    String filestring = selectredUri.getPath();
+                    Bitmap bitmap = BitmapFactory.decodeFile(filestring);
+*/
+                  //  Uri ChangedUri = data.getParcelableExtra("uri");
+                    Bundle bundle = data.getExtras();
+                    //Bitmap bitmap = bundle.getParcelable("data");
+                    Bitmap bitmap = (Bitmap) bundle.get("data"); // android 8.0.0에서 문제 발생하는 부분 */
+                   Uri ChangedUri = BitmapToUri(this.requireContext(), bitmap);
+                    FileList.add(new ImageUnit(ChangedUri));
+                   // FileList.add(new ImageUnit(uri));
 
+                }
             }
             com.example.cs496_proj2.MainActivity main = (com.example.cs496_proj2.MainActivity) getActivity();
+            assert main != null;
             main.setViewPager(1);
         }
     }
 
     public Uri BitmapToUri(Context context, Bitmap bitmap){
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        //FileOutputStream bytes = new FileOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Title"+System.currentTimeMillis(), null);
-        return Uri.parse(path);
+        //String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Title"+System.currentTimeMillis(), null);
+        ContentValues values=new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE,"Title"+System.currentTimeMillis());
+        values.put(MediaStore.Images.Media.DESCRIPTION,"From Camera");
+        Uri path=context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
+        //return Uri.parse(path);
+        return path;
     }
 
 }
