@@ -75,16 +75,16 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     }
 
     @Override
-    public com.example.cs496_proj1.contacts.ContactAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public com.example.cs496_proj2.contacts.ContactAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item,
                                                                 parent, false);
-        com.example.cs496_proj1.contacts.ContactAdapter.ViewHolder vh = new com.example.cs496_proj1.contacts.ContactAdapter.ViewHolder(v) ;
+        com.example.cs496_proj2.contacts.ContactAdapter.ViewHolder vh = new com.example.cs496_proj2.contacts.ContactAdapter.ViewHolder(v) ;
 
         return vh ;
     }
 
     @Override
-    public void onBindViewHolder(com.example.cs496_proj1.contacts.ContactAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(com.example.cs496_proj2.contacts.ContactAdapter.ViewHolder holder, int position) {
         Contact element = mData.get(position) ;
         if (element.image != null)
             holder.imageView.setImageURI(element.image);

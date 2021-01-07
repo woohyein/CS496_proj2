@@ -14,7 +14,7 @@
         android:layout_marginTop="70dp"
         android:fontFamily="casual"
         android:gravity="center_horizontal"
-        android:text="@string/welcome_to_cs_calculator"
+        android:text="welcome_to_cs_calculator"
         android:textAllCaps="false"
         android:textColor="#275793"
         android:textSize="35sp"
