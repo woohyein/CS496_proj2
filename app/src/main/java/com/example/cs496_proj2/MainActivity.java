@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -34,14 +35,20 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Require Permission
-        GetPermission();
-        onRequestPermissionsResult(PERMISSIONS_REQUEST_CODE, REQUIRED_PERMISSIONS, grandResults);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Require Permission
+        GetPermission();
+        //onRequestPermissionsResult(PERMISSIONS_REQUEST_CODE, REQUIRED_PERMISSIONS, grandResults);
+        Log.d("asdf", "onCreate finish");
+    }
+
+
+    public void afterCreate() {
+        Log.d("asdf", "onStart!");
         // TabLayout Initialization
+        super.onStart();
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
 
@@ -143,6 +150,8 @@ public class MainActivity extends AppCompatActivity
                 ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS,
                         PERMISSIONS_REQUEST_CODE);
             }
+        } else {
+            afterCreate();
         }
     }
 
@@ -191,6 +200,8 @@ public class MainActivity extends AppCompatActivity
                         }
                     }).show();
                 }
+            } else {
+                afterCreate();
             }
         }
     }
