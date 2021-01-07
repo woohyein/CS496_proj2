@@ -56,10 +56,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), com.example.cs496_proj2.Gallery.ViewImage.class);
-                String str_uri = photo.imageUri.toString();
-                intent.putExtra("uri", str_uri);
-                //intent.putParcelableArrayListExtra("uri", FileList)
-                v.getContext().startActivity(intent);
+                if (intent != null) {
+                    String str_uri = photo.imageUri.toString();
+                    intent.putExtra("uri", str_uri);
+                    //intent.putParcelableArrayListExtra("uri", FileList)
+                    v.getContext().startActivity(intent);
+                }
             }
         });
     }

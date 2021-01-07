@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity
     String[] REQUIRED_PERMISSIONS = { Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE,
             Manifest.permission.CAMERA,  Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.WRITE_CONTACTS };
-    public int[] grandResults = {-1, -1, -1, -1, -1, -1 };
+            Manifest.permission.WRITE_CONTACTS,  Manifest.permission.WRITE_EXTERNAL_STORAGE };
+    public int[] grandResults = {-1, -1, -1, -1, -1, -1, -1 };
 
     /* Tab variables */
     private ViewPager2 viewPager;
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity
         int cameraPermission = ContextCompat.checkSelfPermission(this, REQUIRED_PERMISSIONS[3]);
         int statePermission = ContextCompat.checkSelfPermission(this, REQUIRED_PERMISSIONS[4]);
         int writeContactPermission = ContextCompat.checkSelfPermission(this, REQUIRED_PERMISSIONS[5]);
+        int writeExternalStoragePermission = ContextCompat.checkSelfPermission(this, REQUIRED_PERMISSIONS[6]);
 
 
         grandResults[0] = readExternalStoragePermission;
@@ -109,13 +110,15 @@ public class MainActivity extends AppCompatActivity
         grandResults[3] = cameraPermission;
         grandResults[4] = statePermission;
         grandResults[5] = writeContactPermission;
+        grandResults[6] = writeExternalStoragePermission;
 
         if (!(grandResults[0] == PackageManager.PERMISSION_GRANTED
                 && grandResults[1] == PackageManager.PERMISSION_GRANTED
                 && grandResults[2] == PackageManager.PERMISSION_GRANTED
                 && grandResults[3] == PackageManager.PERMISSION_GRANTED
                 && grandResults[4] == PackageManager.PERMISSION_GRANTED
-                && grandResults[5] == PackageManager.PERMISSION_GRANTED)) {
+                && grandResults[5] == PackageManager.PERMISSION_GRANTED
+                && grandResults[6] == PackageManager.PERMISSION_GRANTED)) {
 
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
@@ -123,7 +126,8 @@ public class MainActivity extends AppCompatActivity
                     || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[2])
                     || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[3])
                     || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[4])
-                    || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[5]) ) {
+                    || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[5])
+                    || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[6])) {
                 Snackbar.make(mLayout, "이 앱을 실행하려면 외부 저장소, 연락처, 전화 접근 권한이 필요합니다.",
                         Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
                     @Override
@@ -166,7 +170,8 @@ public class MainActivity extends AppCompatActivity
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[2])
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[3])
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[4])
-                        || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[5])) {
+                        || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[5])
+                        || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[6])) {
 
                     // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
                     Snackbar.make(mLayout, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요. ",
