@@ -1,59 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/contact_image_default"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="10dp"
-        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/nanumsqure_r"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        android:paddingTop="15dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="16dp" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_person_24"
+            android:background="#98DDDD"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/numTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintStart_toEndOf="@+id/nameTextView"
-        android:paddingTop="15dp"
-        android:fontFamily="@font/nanumsqure_r"
-        android:gravity="center_vertical"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsqure_r"
+            android:gravity="center"
+            android:paddingTop="15dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="2"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="16dp" />
 
-    <ImageButton
-        android:id="@+id/callButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:background="#77B2C5"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@+id/numTextView"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="5dp"
-        app:srcCompat="@android:drawable/stat_sys_phone_call"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/numTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsqure_r"
+            android:gravity="center"
+            android:paddingTop="15dp"
+            android:textSize="18dp"
+            android:layout_weight="10"
+            app:layout_constraintStart_toEndOf="@+id/nameTextView"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/callButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#98DDDD"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toEndOf="@+id/numTextView"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_baseline_call_24"
+            tools:ignore="MissingConstraints" />
+
+    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

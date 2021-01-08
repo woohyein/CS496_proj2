@@ -5,20 +5,24 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.cs496_proj2.MainActivity;
 import com.example.cs496_proj2.R;
@@ -40,6 +44,8 @@ import java.util.LinkedHashSet;
 
 public class ContactFragment extends Fragment {
     View view;
+    String user = "user1";
+    Fragment fg;
 
     public ArrayList<com.example.cs496_proj2.contacts.Contact> contacts;
     private RecyclerView recyclerView;
@@ -59,18 +65,20 @@ public class ContactFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fg = this;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("asdf", "onCreateView");
         // RecyclerView Initialization
         view = inflater.inflate(R.layout.fragment_contact, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
         DividerItemDecoration dividerItemDecoration =
                 new DividerItemDecoration(recyclerView.getContext(),
-                                        new LinearLayoutManager(getActivity()).getOrientation());
+                        new LinearLayoutManager(getActivity()).getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
         // Set LayoutManager
@@ -103,7 +111,7 @@ public class ContactFragment extends Fragment {
         });
 
         // Init addButton
-        ImageButton addButton = (ImageButton) view.findViewById(R.id.addButton);
+        Button addButton = (Button) view.findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,14 +122,27 @@ public class ContactFragment extends Fragment {
         });
 
         // goServerButton
-        ImageButton goServer = (ImageButton) view.findViewById(R.id.goServer);
+        Button goServer = (Button) view.findViewById(R.id.goServer);
         goServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new JSONTask().execute("http://192.249.18.228:3000/remove");//AsyncTask 시작시킴
                 new JSONTask().execute("http://192.249.18.228:3000/send");//AsyncTask 시작시킴
-                // new JSONTask().execute("http://192.249.18.228:3000/receive");//AsyncTask 시작시킴
                 Toast.makeText(getActivity(), "" + contacts.size() +  "개의 연락처를 동기화 했습니다", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // goServerButton
+        Button downServer = (Button) view.findViewById(R.id.downServer);
+        downServer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new JSONTask().execute("http://192.249.18.228:3000/take");//AsyncTask 시작시킴
+                new JSONTask().execute("http://192.249.18.228:3000/receive");//AsyncTask 시작시킴
+                Toast.makeText(getActivity(), "" + contacts.size() +  "개의 연락처를 불러왔습니다", Toast.LENGTH_SHORT).show();
+//
+//                MainActivity main = (MainActivity) getActivity();
+//                main.setViewPager(0);
             }
         });
 
@@ -197,7 +218,7 @@ public class ContactFragment extends Fragment {
                     try {
                         //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.accumulate("user", "user1");
+                        jsonObject.accumulate("user", user);
                         jsonObject.accumulate("phone", thisContact.phone);
                         jsonObject.accumulate("fullName", thisContact.fullName);
                         jsonObject.accumulate("lookup", thisContact.lookup);
@@ -290,6 +311,8 @@ public class ContactFragment extends Fragment {
                             buffer.append(line);
                         }
 
+                        Log.d("asdf", buffer.toString());
+
                         return buffer.toString();//서버로 부터 받은 값을 리턴해줌 아마 OK!!가 들어올것임
 
                     } catch (MalformedURLException e){
@@ -311,11 +334,68 @@ public class ContactFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            } else if(urls[0].equals("http://192.249.18.228:3000/take")){
+                try {
+                    //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.accumulate("user", user);
+
+                    HttpURLConnection con = null;
+                    BufferedReader reader = null;
+
+                    try {
+                        //URL url = new URL("http://192.168.25.16:3000/users");
+                        URL url = new URL(urls[0]);
+                        //연결을 함
+                        con = (HttpURLConnection) url.openConnection();
+
+                        con.setRequestMethod("POST");//POST방식으로 보냄
+                        con.setRequestProperty("Cache-Control", "no-cache");//캐시 설정
+                        con.setRequestProperty("Content-Type", "application/json");//application JSON 형식으로 전송
+
+
+                        con.setRequestProperty("Accept", "text/html");//서버에 response 데이터를 html로 받음
+                        con.setDoOutput(true);//Outstream으로 post 데이터를 넘겨주겠다는 의미
+                        con.setDoInput(true);//Inputstream으로 서버로부터 응답을 받겠다는 의미
+                        con.connect();
+
+                        //서버로 보내기위해서 스트림 만듬
+                        OutputStream outStream = con.getOutputStream();
+                        //버퍼를 생성하고 넣음
+                        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
+                        writer.write(jsonObject.toString());
+                        writer.flush();
+                        writer.close();//버퍼를 받아줌
+
+                        //서버로 부터 데이터를 받음
+                        InputStream stream = con.getInputStream();
+
+                        reader = new BufferedReader(new InputStreamReader(stream));
+
+                        StringBuffer buffer = new StringBuffer();
+
+                        String line = "";
+                        while((line = reader.readLine()) != null){
+                            buffer.append(line);
+                        }
+
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (con != null) {
+                            con.disconnect();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } else if(urls[0].equals("http://192.249.18.228:3000/remove")){
                 try {
                     //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.accumulate("user", "user1");
+                    jsonObject.accumulate("user", user);
 
                     HttpURLConnection con = null;
                     BufferedReader reader = null;
@@ -370,7 +450,8 @@ public class ContactFragment extends Fragment {
                 }
             }
 
-
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(fg).attach(fg).commit();
 
             return null;
         }
@@ -378,7 +459,6 @@ public class ContactFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(getContext().getApplicationContext(),"OK!", Toast.LENGTH_SHORT);
         }
     }
 }
