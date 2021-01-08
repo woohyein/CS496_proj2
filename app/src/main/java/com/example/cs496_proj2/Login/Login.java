@@ -37,7 +37,6 @@ public class Login extends AppCompatActivity {
 
         loginButton.setReadPermissions(Arrays.asList("public_profile","email"));
         loginButton.registerCallback(callbackManager, mLoginCallback);
-
     }
 
 /*

@@ -27,8 +27,9 @@ public void onSuccess(LoginResult loginResult) {
         requestMe(loginResult.getAccessToken());
 
         Context con = Login.getAppContext();
-        Intent intent = new Intent(con, MainActivity.class);
-        ((Activity)con).startActivity(intent);
+        ((Activity) con).finish();
+        /*Intent intent = new Intent(con, MainActivity.class);
+        ((Activity)con).startActivity(intent);*/
         }
 
 // 로그인 창을 닫을 경우, 호출됩니다.

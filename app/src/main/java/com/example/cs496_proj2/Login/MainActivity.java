@@ -1,6 +1,7 @@
 package com.example.cs496_proj2.Login;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.facebook.appevents.AppEventsLogger;
 
 public class MainActivity extends AppCompatActivity
     implements ActivityCompat.OnRequestPermissionsResultCallback {
+    private static Context context;
     /* Permission variables */
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS = { Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MainActivity.context = this;
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
 
         // Require Permission
         GetPermission();
@@ -208,4 +213,9 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
+    public static Context getAppContext(){
+        return MainActivity.context;
+    }
+
 }
