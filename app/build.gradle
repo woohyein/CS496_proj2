@@ -6,8 +6,12 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    repositories {
+        mavenCentral()
+    }
+
     defaultConfig {
-        applicationId "com.example.cs496_proj1"
+        applicationId "com.example.cs496_proj2"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
@@ -49,4 +53,5 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'com.android.support:design:30.0.0'
     implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }

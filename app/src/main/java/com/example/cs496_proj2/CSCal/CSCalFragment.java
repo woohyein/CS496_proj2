@@ -2,18 +2,32 @@ package com.example.cs496_proj2.CSCal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.cs496_proj2.R;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import java.util.Arrays;
 
 
 public class CSCalFragment extends Fragment {
+    CallbackManager callbackManager = CallbackManager.Factory.create();
 
     public CSCalFragment() {
     }
@@ -31,19 +45,54 @@ public class CSCalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        CallbackManager callbackManager = CallbackManager.Factory.create();
         View view = inflater.inflate(R.layout.fragment_c_s_cal, container, false);
-        Button button1 = view.findViewById(R.id.button);
-        Button button2 = view.findViewById(R.id.button2);
+        LoginButton loginButton = (LoginButton) view.findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
 
-        button1.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), com.example.cs496_proj2.CSCal.NumSystem.class);
-            startActivity(intent);
-        });
+        // If using in a fragment
+        loginButton.setFragment(this);
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+                    }
 
-        button2.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), com.example.cs496_proj2.CSCal.BitOperation.class);
-            startActivity(intent);
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                    }
+                });
+
+
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Toast msg = Toast.makeText(getContext(), "Login Success!", Toast.LENGTH_SHORT);
+                msg.show();
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
         });
 
         return view;
@@ -51,5 +100,11 @@ public class CSCalFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

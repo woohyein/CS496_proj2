@@ -18,6 +18,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 public class MainActivity extends AppCompatActivity
     implements ActivityCompat.OnRequestPermissionsResultCallback {
@@ -42,6 +44,9 @@ public class MainActivity extends AppCompatActivity
         GetPermission();
         //onRequestPermissionsResult(PERMISSIONS_REQUEST_CODE, REQUIRED_PERMISSIONS, grandResults);
         Log.d("asdf", "onCreate finish");
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
     }
 
 
@@ -67,7 +72,7 @@ public class MainActivity extends AppCompatActivity
                     tab.setText("Gallery");
                     break;
                 case 2:
-                    tab.setText("CS_Cal");
+                    tab.setText("Facebook");
                     break;
             }
             viewPager.setCurrentItem(0);
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     public void GetPermission() {
