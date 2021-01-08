@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:fontFamily="casual"
+        android:gravity="center_horizontal"
+        android:text="Facebook Login"
+        android:textAllCaps="false"
+        android:textColor="#275793"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"
+        android:fontFamily="casual"
+        android:gravity="center_horizontal"
+        android:text="Need Facebook Login to Start App"
+        android:textAllCaps="false"
+        android:textColor="#275793"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginBottom="30dp" />
+
+
+</RelativeLayout>

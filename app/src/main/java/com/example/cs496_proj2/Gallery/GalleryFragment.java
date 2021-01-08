@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.cs496_proj2.Login.MainActivity;
 import com.example.cs496_proj2.R;
 
 import java.io.ByteArrayOutputStream;
@@ -121,7 +122,7 @@ public class GalleryFragment extends Fragment {
                     FileList.add(new ImageUnit(ChangedUri));
                 }
             }
-            com.example.cs496_proj2.MainActivity main = (com.example.cs496_proj2.MainActivity) getActivity();
+            MainActivity main = (MainActivity) getActivity();
             assert main != null;
             main.setViewPager(1);
         }

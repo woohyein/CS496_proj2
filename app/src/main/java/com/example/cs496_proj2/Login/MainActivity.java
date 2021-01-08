@@ -1,10 +1,9 @@
-package com.example.cs496_proj2;
+package com.example.cs496_proj2.Login;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -15,6 +14,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.cs496_proj2.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -43,19 +43,17 @@ public class MainActivity extends AppCompatActivity
         // Require Permission
         GetPermission();
         //onRequestPermissionsResult(PERMISSIONS_REQUEST_CODE, REQUIRED_PERMISSIONS, grandResults);
-        Log.d("asdf", "onCreate finish");
-
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
     }
 
 
     public void afterCreate() {
-        Log.d("asdf", "onStart!");
+        //startActivity(new Intent(this, Login.class));
+
         // TabLayout Initialization
         super.onStart();
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
+       TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         // ViewPager Initialization
         viewPager = (ViewPager2) findViewById(R.id.pager);
@@ -103,7 +101,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
     }
 
     public void GetPermission() {
@@ -146,7 +143,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(View view) {
                         // 3-3. 사용자에게 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                        ActivityCompat.requestPermissions(com.example.cs496_proj2.MainActivity.this, REQUIRED_PERMISSIONS,
+                        ActivityCompat.requestPermissions(MainActivity.this, REQUIRED_PERMISSIONS,
                                 PERMISSIONS_REQUEST_CODE);
                     }
                 }).show();
