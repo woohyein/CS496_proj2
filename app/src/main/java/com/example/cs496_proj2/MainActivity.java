@@ -1,4 +1,4 @@
-package com.example.cs496_proj2.Login;
+package com.example.cs496_proj2;
 
 import android.Manifest;
 import android.content.Context;
@@ -9,22 +9,21 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.cs496_proj2.R;
+import com.example.cs496_proj2.Login.Login;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 public class MainActivity extends AppCompatActivity
     implements ActivityCompat.OnRequestPermissionsResultCallback {
     private static Context context;
+    String user_id = null;
+
     /* Permission variables */
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS = { Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -42,23 +41,21 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MainActivity.context = this;
+
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
 
         // Require Permission
         GetPermission();
         //onRequestPermissionsResult(PERMISSIONS_REQUEST_CODE, REQUIRED_PERMISSIONS, grandResults);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
+        //FacebookSdk.sdkInitialize(getApplicationContext());
+       // AppEventsLogger.activateApp(this);
     }
 
-
     public void afterCreate() {
-        //startActivity(new Intent(this, Login.class));
-
         // TabLayout Initialization
         super.onStart();
-       TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         // ViewPager Initialization
         viewPager = (ViewPager2) findViewById(R.id.pager);
@@ -98,14 +95,13 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    public void onResume(){
+        super.onResume();
+    }
+
     public void setViewPager (int pos) {
         viewPager.setAdapter(fgAdapter);
         viewPager.setCurrentItem(pos);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void GetPermission() {

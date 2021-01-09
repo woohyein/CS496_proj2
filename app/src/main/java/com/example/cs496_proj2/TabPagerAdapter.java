@@ -1,4 +1,4 @@
-package com.example.cs496_proj2.Login;
+package com.example.cs496_proj2;
 
 import android.os.Build;
 

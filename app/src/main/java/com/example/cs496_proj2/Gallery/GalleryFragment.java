@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.example.cs496_proj2.Login.MainActivity;
+import com.example.cs496_proj2.MainActivity;
 import com.example.cs496_proj2.R;
 
 import java.io.ByteArrayOutputStream;

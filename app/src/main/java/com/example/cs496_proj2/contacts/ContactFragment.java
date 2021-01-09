@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cs496_proj2.Login.MainActivity;
+import com.example.cs496_proj2.MainActivity;
 import com.example.cs496_proj2.R;
 
 import java.util.ArrayList;

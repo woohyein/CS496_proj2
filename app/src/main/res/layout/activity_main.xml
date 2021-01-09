@@ -6,7 +6,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login.MainActivity"
+    tools:context=".MainActivity"
     android:orientation="vertical" >
 
     <com.google.android.material.tabs.TabLayout

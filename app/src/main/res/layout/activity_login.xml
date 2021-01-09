@@ -38,5 +38,15 @@
         android:layout_marginLeft="120dp"
         android:layout_marginBottom="30dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mybutton"
+        android:gravity="center"
+        android:layout_marginTop="350dp"
+        android:layout_marginLeft="150dp"
+        android:text="server"
+        />
+
 
 </RelativeLayout>
