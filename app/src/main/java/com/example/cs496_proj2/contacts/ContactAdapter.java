@@ -1,8 +1,10 @@
 package com.example.cs496_proj2.contacts;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs496_proj2.R;
@@ -48,17 +51,27 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             numView = itemView.findViewById(R.id.numTextView);
             callButton = (ImageButton) itemView.findViewById(R.id.callButton);
 
-            // Click event for itemView
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION){
-                        Contact ct = mData.get(pos);
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(ContactsContract.Contacts.getLookupUri(ct.id, ct.lookup));
-                        fragment.startActivityForResult(intent, 0);
-                    }
+                public boolean onLongClick(View v) {
+                    // 오랫동안 눌렀을 때 이벤트가 발생됨
+                    AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getContext());
+                    builder.setTitle("삭제하시겠습니까?")
+                            .setPositiveButton("삭제",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    GlobalContacts.getInstance().getContacts().remove(getAdapterPosition());
+                                    notifyDataSetChanged();
+                                    FragmentTransaction ft = fragment.getFragmentManager().beginTransaction();
+                                    ft.detach(fragment).attach(fragment).commit();
+                                }
+                            })
+                            .setNegativeButton("취소",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {}
+                            })
+                            .show();
+
+                    Log.d("asdf", "long click");
+                    return false;
                 }
             });
 
@@ -66,7 +79,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             callButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + numView.getText()));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + numView.getText()));
                     itemView.getContext().startActivity(intent);
                 }
             });

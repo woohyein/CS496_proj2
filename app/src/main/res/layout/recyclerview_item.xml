@@ -16,6 +16,7 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_baseline_person_24"
             android:background="#98DDDD"
+            android:scaleType="centerCrop"
             tools:ignore="MissingConstraints" />
 
         <TextView

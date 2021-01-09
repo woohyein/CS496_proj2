@@ -27,6 +27,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.cs496_proj2.MainActivity;
 import com.example.cs496_proj2.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -47,13 +49,12 @@ public class ContactFragment extends Fragment {
     String user = "user1";
     Fragment fg;
 
-    public ArrayList<com.example.cs496_proj2.contacts.Contact> contacts;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private com.example.cs496_proj2.contacts.ContactAdapter adapter;
 
     public ContactFragment() {
-        // Required empty public constructor
+        Log.d("asdf", "Contact 생성자");
     }
 
     public static com.example.cs496_proj2.contacts.ContactFragment newInstance() {
@@ -66,6 +67,9 @@ public class ContactFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fg = this;
+        Log.d("asdf", "onCreate in Fragment");
+        // Init contact list
+        GlobalContacts.getInstance().setContacts(getContacts());
     }
 
     @Override
@@ -86,11 +90,9 @@ public class ContactFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.scrollToPosition(0);
 
-        // Init contact list
-        contacts = getContacts();
-
         // Set Adapter
-        adapter = new com.example.cs496_proj2.contacts.ContactAdapter(contacts, this);
+        adapter = new com.example.cs496_proj2.contacts.ContactAdapter(GlobalContacts.getInstance().getContacts(), this);
+        Log.d("asdf", "" + GlobalContacts.getInstance().getContacts().size());
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -115,9 +117,8 @@ public class ContactFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_INSERT);
-                intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
-                startActivityForResult(intent, 0);
+                Intent intent = new Intent(getActivity(), AddContactActivity.class);
+                startActivityForResult(intent, 1111);
             }
         });
 
@@ -128,7 +129,7 @@ public class ContactFragment extends Fragment {
             public void onClick(View v) {
                 new JSONTask().execute("http://192.249.18.228:3000/remove");//AsyncTask 시작시킴
                 new JSONTask().execute("http://192.249.18.228:3000/send");//AsyncTask 시작시킴
-                Toast.makeText(getActivity(), "" + contacts.size() +  "개의 연락처를 동기화 했습니다", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "" + GlobalContacts.getInstance().getContacts().size() +  "개의 연락처를 동기화 했습니다", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -139,8 +140,19 @@ public class ContactFragment extends Fragment {
             public void onClick(View v) {
                 new JSONTask().execute("http://192.249.18.228:3000/take");//AsyncTask 시작시킴
                 new JSONTask().execute("http://192.249.18.228:3000/receive");//AsyncTask 시작시킴
-                Toast.makeText(getActivity(), "" + contacts.size() +  "개의 연락처를 불러왔습니다", Toast.LENGTH_SHORT).show();
-//
+
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(getActivity(), "" + GlobalContacts.getInstance().getContacts().size() +  "개의 연락처를 불러왔습니다", Toast.LENGTH_SHORT).show();
+
+                adapter.notifyDataSetChanged();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(fg).attach(fg).commit();
+
+                Log.d("asdf", "here!!!!");
 //                MainActivity main = (MainActivity) getActivity();
 //                main.setViewPager(0);
             }
@@ -152,8 +164,10 @@ public class ContactFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        MainActivity main = (MainActivity) getActivity();
-        main.setViewPager(0);
+        Log.d("asdf", "activity end");
+        adapter.notifyDataSetChanged();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(fg).attach(fg).commit();
     }
 
     private ArrayList<com.example.cs496_proj2.contacts.Contact> getContacts() {
@@ -163,8 +177,6 @@ public class ContactFragment extends Fragment {
                 ContactsContract.CommonDataKinds.Phone.NUMBER,
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Photo.PHOTO_URI,
-                ContactsContract.CommonDataKinds.Phone._ID,
-                ContactsContract.CommonDataKinds.Phone.LOOKUP_KEY
         };
         String sortOrder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
 
@@ -180,10 +192,8 @@ public class ContactFragment extends Fragment {
                 String phone = cursor.getString(0);
                 String fullName = cursor.getString(1);
                 String image = cursor.getString(2);
-                long person = cursor.getLong(3);
-                String lookup = cursor.getString(4);
 
-                com.example.cs496_proj2.contacts.Contact contact = new com.example.cs496_proj2.contacts.Contact(phone, fullName, image, person, lookup);
+                com.example.cs496_proj2.contacts.Contact contact = new com.example.cs496_proj2.contacts.Contact(phone, fullName, image);
 
                 if (contact.isStartWith("01")) {
                     hasList.add(contact);
@@ -194,9 +204,6 @@ public class ContactFragment extends Fragment {
         }
 
         contacts = new ArrayList<com.example.cs496_proj2.contacts.Contact>(hasList);
-        for (int i = 0; i < contacts.size(); i++) {
-            contacts.get(i).setId(i);
-        }
 
         if (cursor != null) {
             cursor.close();
@@ -214,18 +221,15 @@ public class ContactFragment extends Fragment {
         @Override
         protected String doInBackground(String... urls) {
             if(urls[0].equals("http://192.249.18.228:3000/send")){
-                for(Contact thisContact: contacts) {
+                for(Contact thisContact: GlobalContacts.getInstance().getContacts()) {
                     try {
                         //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.accumulate("user", user);
                         jsonObject.accumulate("phone", thisContact.phone);
                         jsonObject.accumulate("fullName", thisContact.fullName);
-                        jsonObject.accumulate("lookup", thisContact.lookup);
-                        jsonObject.accumulate("personId", thisContact.personId);
                         if(thisContact.image != null) jsonObject.accumulate("image", thisContact.image.toString());
                         else jsonObject.accumulate("image", "null");
-                        jsonObject.accumulate("id", thisContact.id);
 
                         HttpURLConnection con = null;
                         BufferedReader reader = null;
@@ -311,7 +315,8 @@ public class ContactFragment extends Fragment {
                             buffer.append(line);
                         }
 
-                        Log.d("asdf", buffer.toString());
+                        // Log.d("asdf", buffer.toString());
+                        jsonParsing(buffer.toString());
 
                         return buffer.toString();//서버로 부터 받은 값을 리턴해줌 아마 OK!!가 들어올것임
 
@@ -459,6 +464,36 @@ public class ContactFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+        }
+    }
+
+    private void jsonParsing(String json)
+    {
+        try{
+            ArrayList<Contact> newContact = new ArrayList<Contact>();
+
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray contactArray = jsonObject.getJSONArray("contact");
+            for(int i=0; i<contactArray.length(); i++) {
+                JSONObject contactObject = contactArray.getJSONObject(i);
+
+                Contact contact;
+                String image = contactObject.getString("image");
+                if(image.equals("null")) contact = new Contact(contactObject.getString("phone"), contactObject.getString("fullName"), null);
+                else contact = new Contact(contactObject.getString("phone"), contactObject.getString("fullName"), image);
+
+                Log.d("asdf", contact.getMsg());
+
+                newContact.add(contact);
+            }
+
+            GlobalContacts.getInstance().setContacts(newContact);
+
+            adapter.notifyDataSetChanged();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(fg).attach(fg).commit();
+        }catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
