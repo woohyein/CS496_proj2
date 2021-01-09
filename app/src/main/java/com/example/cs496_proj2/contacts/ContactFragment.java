@@ -153,8 +153,6 @@ public class ContactFragment extends Fragment {
                 ft.detach(fg).attach(fg).commit();
 
                 Log.d("asdf", "here!!!!");
-//                MainActivity main = (MainActivity) getActivity();
-//                main.setViewPager(0);
             }
         });
 

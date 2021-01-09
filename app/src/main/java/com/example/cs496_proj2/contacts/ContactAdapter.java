@@ -59,6 +59,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                     builder.setTitle("삭제하시겠습니까?")
                             .setPositiveButton("삭제",new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
+                                    Log.d("asdf", "position: " + getAdapterPosition());
                                     GlobalContacts.getInstance().getContacts().remove(getAdapterPosition());
                                     notifyDataSetChanged();
                                     FragmentTransaction ft = fragment.getFragmentManager().beginTransaction();
