@@ -28,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.cs496_proj2.ApiService;
 import com.example.cs496_proj2.R;
+import com.example.cs496_proj2.contacts.AddContactActivity;
 import com.example.cs496_proj2.contacts.GlobalContacts;
 
 import java.io.ByteArrayOutputStream;
@@ -111,28 +112,21 @@ public class GalleryFragment extends Fragment {
 
         // camera Button
         camera = (Button) view.findViewById(R.id.camera);
-        camera.setOnClickListener(v ->{
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, CAPTURE_PHOTO);
-        });
-
-        // goServer Button
-        goServer = (Button) view.findViewById(R.id.goServer);
-        goServer.setOnClickListener(v ->{
-            for(ImageUnit img: FileList){
-                try {
-                    postimage(img.imageBitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, CAPTURE_PHOTO);
             }
-            Toast.makeText(getActivity(), "개의 사진을 백업 했습니다", Toast.LENGTH_SHORT).show();
         });
 
         // downServer Button
         downServer = (Button) view.findViewById(R.id.downServer);
-        downServer.setOnClickListener(v ->{
-            Toast.makeText(getActivity(), "복구", Toast.LENGTH_SHORT).show();
+        downServer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "복구", Toast.LENGTH_SHORT).show();
+            }
         });
 
         return view;
