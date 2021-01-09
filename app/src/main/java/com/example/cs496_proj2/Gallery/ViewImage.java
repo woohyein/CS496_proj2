@@ -52,7 +52,7 @@ public class ViewImage extends AppCompatActivity {
         photoView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                // 오랫동안 눌렀을 때 이벤트가 발생됨
+                // 오랫동안 눌렀을 때 이벤트가 발생됨 <- 이전에 다이얼로그로 백업 여부 확인
                 Log.d("asdf", "image long click");
 
                 try {

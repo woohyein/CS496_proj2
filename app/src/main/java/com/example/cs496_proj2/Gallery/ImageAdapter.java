@@ -29,6 +29,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image);
+            
+            // itemView 롱클릭 -> 삭제 다이얼로그
         }
     }
 

@@ -51,7 +51,6 @@ import retrofit2.Retrofit;
 @RequiresApi(api = Build.VERSION_CODES.Q)
 public class GalleryFragment extends Fragment {
 
-    public ArrayList<ImageUnit> FileList;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager layoutManager;
     ImageAdapter adapter;
@@ -60,7 +59,6 @@ public class GalleryFragment extends Fragment {
     Fragment fg;
 
     Button camera;
-    Button goServer;
     Button downServer;
 
     ApiService apiService;
@@ -79,6 +77,12 @@ public class GalleryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         fg = this;
         mGlideRequestManager = Glide.with(this);
+        // Init image list
+        try {
+           GlobalGallery.getInstance().setGallery(LoadImages());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         initRetrofitClient();
     }
 
@@ -95,15 +99,8 @@ public class GalleryFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.scrollToPosition(0);
 
-        // Init image list
-        try {
-            FileList = LoadImages();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         // Set Adapter
-        adapter = new ImageAdapter(FileList, mGlideRequestManager);
+        adapter = new ImageAdapter(GlobalGallery.getInstance().getGallery(), mGlideRequestManager);
         mRecyclerView.setAdapter(adapter);
 
 
@@ -165,7 +162,7 @@ public class GalleryFragment extends Fragment {
                     Bundle bundle = data.getExtras();
                     Bitmap bitmap = (Bitmap) bundle.get("data"); // android 8.0.0에서 문제 발생하는 부분
                     Uri ChangedUri = BitmapToUri(bitmap);
-                    FileList.add(new ImageUnit(ChangedUri, bitmap));
+                    GlobalGallery.getInstance().addImage(new ImageUnit(ChangedUri, bitmap));
                 }
             }
 //            com.example.cs496_proj2.MainActivity main = (com.example.cs496_proj2.MainActivity) getActivity();
