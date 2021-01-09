@@ -42,11 +42,11 @@ public class AddContactActivity extends AppCompatActivity {
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(name.getText().toString() == ""){
+                if(name.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(), "이름을 추가하세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(number.getText().toString() == ""){
+                if(number.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(), "번호를 추가하세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
