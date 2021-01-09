@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.cs496_proj2.Login.Login;
+import com.facebook.login.LoginManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity
         //onRequestPermissionsResult(PERMISSIONS_REQUEST_CODE, REQUIRED_PERMISSIONS, grandResults);
         //FacebookSdk.sdkInitialize(getApplicationContext());
        // AppEventsLogger.activateApp(this);
+    }
+
+    public void onStop(){
+        super.onStop();
+        LoginManager.getInstance().logOut();
     }
 
     public void afterCreate() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -33,20 +33,17 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginBottom="30dp" />
+        android:layout_gravity="center_horizontal|center"
+         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mybutton"
-        android:gravity="center"
-        android:layout_marginTop="350dp"
-        android:layout_marginLeft="150dp"
-        android:text="server"
+        android:layout_gravity="center_horizontal|center"
+        android:layout_marginTop="60dp"
+        android:text="Start App!"
         />
 
 
-</RelativeLayout>
+</FrameLayout>
