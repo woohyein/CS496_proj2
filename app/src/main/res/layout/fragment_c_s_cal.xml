@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,15 +11,62 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_marginTop="70dp"
-        android:fontFamily="casual"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/masque"
         android:gravity="center_horizontal"
-        android:text="Facebook"
-        android:textAllCaps="false"
+        android:text=" Word Game "
+        android:textAllCaps="true"
         android:textColor="#275793"
-        android:textSize="35sp"
+        android:textSize="43dp"
         android:textStyle="bold" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="-- Select level --"
+        android:fontFamily="@font/masque"
+        android:textSize="27dp"
+        android:textColor="#B0275793"
+        android:layout_marginBottom="80dp"
+        />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:text="High"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFFFF"
+        android:backgroundTint="#8F8A8E"
+        android:fontFamily="@font/masque"
+        android:textSize="20dp"
+        />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:text="MEDIUM"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFFFF"
+        android:backgroundTint="#708098"
+        android:fontFamily="@font/masque"
+        android:layout_marginTop="70dp"
+        android:textSize="20dp"
+        />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:text="LOW"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFFFF"
+        android:backgroundTint="#3D6075"
+        android:fontFamily="@font/masque"
+        android:layout_marginTop="140dp"
+        android:textSize="20dp"
+
+        />
+</FrameLayout>

@@ -45,6 +45,13 @@ public class CSCalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_c_s_cal, container, false);
+
+        Button button1 = view.findViewById(R.id.button);
+        Button button2 = view.findViewById(R.id.button2);
+        Button button3 = view.findViewById(R.id.button3);
+
+        //button1.setOnClickListener();
+
         return view;
     }
 

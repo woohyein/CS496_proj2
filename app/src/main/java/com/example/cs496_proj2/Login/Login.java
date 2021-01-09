@@ -95,11 +95,9 @@ public class Login extends AppCompatActivity {
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 Log.d("result", object.toString());
 
-                                //id = object.getString("id");
                                 str_id = token.getUserId();
                                 str_token = token.getToken();
                                 str_appId = token.getApplicationId();
-
                             }
                         });
                 Bundle parameters = new Bundle();
