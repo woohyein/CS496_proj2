@@ -142,7 +142,7 @@ public class ContactFragment extends Fragment {
                 new JSONTask().execute("http://192.249.18.228:3000/receive");//AsyncTask 시작시킴
 
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(300);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
