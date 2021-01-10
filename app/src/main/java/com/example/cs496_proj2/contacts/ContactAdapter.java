@@ -22,11 +22,10 @@ import java.util.ArrayList;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
     private Fragment fragment;
-    private ArrayList<Contact> mData;
+    private ArrayList<Contact> mData = GlobalContacts.getInstance().getContacts();
 
     // Constructor
-    ContactAdapter(ArrayList<Contact> list, Fragment fm) {
-        mData = list ;
+    ContactAdapter(Fragment fm) {
         fragment = fm;
     }
 

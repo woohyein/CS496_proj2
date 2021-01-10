@@ -91,7 +91,7 @@ public class ContactFragment extends Fragment {
         recyclerView.scrollToPosition(0);
 
         // Set Adapter
-        adapter = new com.example.cs496_proj2.contacts.ContactAdapter(GlobalContacts.getInstance().getContacts(), this);
+        adapter = new com.example.cs496_proj2.contacts.ContactAdapter(this);
         Log.d("asdf", "" + GlobalContacts.getInstance().getContacts().size());
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

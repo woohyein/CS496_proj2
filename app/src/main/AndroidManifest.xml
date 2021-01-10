@@ -24,7 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS496_proj2"
         android:usesCleartextTraffic="true">
-        <activity android:name=".contacts.AddContactActivity"
+        <activity android:name=".Gallery.BackupGalleryActivity" />
+        <activity
+            android:name=".contacts.AddContactActivity"
             android:theme="@style/Transparent" />
         <activity android:name=".MainActivity">
             <intent-filter>

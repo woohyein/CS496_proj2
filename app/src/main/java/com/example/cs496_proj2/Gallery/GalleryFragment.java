@@ -60,6 +60,7 @@ public class GalleryFragment extends Fragment {
 
     Button camera;
     Button downServer;
+    Button backup;
 
     ApiService apiService;
 
@@ -100,7 +101,7 @@ public class GalleryFragment extends Fragment {
         mRecyclerView.scrollToPosition(0);
 
         // Set Adapter
-        adapter = new ImageAdapter(GlobalGallery.getInstance().getGallery(), mGlideRequestManager);
+        adapter = new ImageAdapter(mGlideRequestManager, fg);
         mRecyclerView.setAdapter(adapter);
 
 
@@ -114,6 +115,16 @@ public class GalleryFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, CAPTURE_PHOTO);
+            }
+        });
+
+        // backup Button
+        backup = (Button) view.findViewById(R.id.backup);
+        backup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), BackupGalleryActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -151,7 +162,6 @@ public class GalleryFragment extends Fragment {
 
         return FileList;
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
