@@ -1,8 +1,10 @@
 package com.example.cs496_proj2.Gallery;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,15 +34,18 @@ public class BackupImageAdapter extends RecyclerView.Adapter<BackupImageAdapter.
     private ArrayList<String> mData = null;
     Context context;
     Context getAppContext;
+    Activity activity;
 
     ApiService apiService;
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    BackupImageAdapter(RequestManager glideRequestManager, ArrayList<String> list, Context context, Context getAppContext) {
+    BackupImageAdapter(RequestManager glideRequestManager, ArrayList<String> list, Context context, Context getAppContext, Activity activity) {
         this.mData = list ;
         this.glideRequestManager = glideRequestManager;
         this.context = context;
         this.getAppContext = getAppContext;
+        this.activity = activity;
+
         Log.d("asdf", "BackupImageAdapter 생성자 실행은 되냐?");
         initRetrofitClient();
     }
@@ -53,6 +58,19 @@ public class BackupImageAdapter extends RecyclerView.Adapter<BackupImageAdapter.
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image);
 
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), com.example.cs496_proj2.Gallery.ViewImage.class);
+                    if (intent != null) {
+                        String str_uri = "http://192.249.18.228:3001/uploads/"+mData.get(getAdapterPosition());
+                        intent.putExtra("uri", str_uri);
+                        //intent.putParcelableArrayListExtra("uri", FileList)
+                        v.getContext().startActivity(intent);
+                    }
+                }
+            });
+
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -63,8 +81,11 @@ public class BackupImageAdapter extends RecyclerView.Adapter<BackupImageAdapter.
                                 public void onClick(DialogInterface dialog, int id) {
                                     Log.d("asdf", "position: " + getAdapterPosition());
                                     delimage(mData.get(getAdapterPosition()));
-                                    mData.remove(getAdapterPosition());
-                                    notifyDataSetChanged();
+
+                                    Intent intent = new Intent(activity, BackupGalleryActivity.class);
+                                    activity.startActivity(intent);
+                                    activity.overridePendingTransition(0,0);
+                                    activity.finish();
                                 }
                             })
                             .setNegativeButton("취소",new DialogInterface.OnClickListener() {

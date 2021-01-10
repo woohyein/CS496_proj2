@@ -54,7 +54,8 @@ public class ViewImage extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String s = extras.getString("uri");
         Uri myUri = Uri.parse(s);
-        photoView.setImageURI(myUri);
+//        photoView.setImageURI(myUri);
+        Glide.with(this).load(s).into(photoView);
 
 
 

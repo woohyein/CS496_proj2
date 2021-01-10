@@ -65,7 +65,7 @@ public class BackupGalleryActivity extends AppCompatActivity {
         recyclerView.scrollToPosition(0);
 
         // Set Adapter
-        adapter = new BackupImageAdapter(glideRequestManager, imagePath, context, getApplicationContext());
+        adapter = new BackupImageAdapter(glideRequestManager, imagePath, context, getApplicationContext(), this);
         recyclerView.setAdapter(adapter);
     }
 
