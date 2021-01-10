@@ -60,10 +60,8 @@ public class Login extends AppCompatActivity {
 
         // init API
         initMyAPI(baseUrl);
-        //accessToken = AccessToken.getCurrentAccessToken();
 
         // Login
-        //mLoginCallback = new LoginCallback();
         callbackManager = CallbackManager.Factory.create();
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
