@@ -7,11 +7,17 @@ public class ImageUnit {
 
     Bitmap imageBitmap;
     Uri imageUri;
+    String imagePath;
 
     public ImageUnit(Uri imageUri, Bitmap imageBitmap) {
         super();
-
         this.imageUri = imageUri;
         this.imageBitmap = imageBitmap;
+    }
+
+    public ImageUnit(String imagePath) {
+        super();
+        this.imageUri = null;
+        this.imagePath = imagePath;
     }
 }

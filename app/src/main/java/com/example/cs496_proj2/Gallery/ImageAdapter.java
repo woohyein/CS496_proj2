@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.RequestManager;
 import com.example.cs496_proj2.R;
-import com.example.cs496_proj2.contacts.GlobalContacts;
 
 import java.util.ArrayList;
 
@@ -49,7 +48,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), com.example.cs496_proj2.Gallery.ViewImage.class);
                     if (intent != null) {
-                        String str_uri = ImgList.get(getAdapterPosition()).imageUri.toString();
+                        String str_uri;
+                        if(ImgList.get(getAdapterPosition()).imageUri == null)  str_uri = ImgList.get(getAdapterPosition()).imagePath;
+                        else str_uri = ImgList.get(getAdapterPosition()).imageUri.toString();
                         intent.putExtra("uri", str_uri);
                         //intent.putParcelableArrayListExtra("uri", FileList)
                         v.getContext().startActivity(intent);
@@ -93,17 +94,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @Override public void onBindViewHolder(ViewHolder holder, int position) {
         com.example.cs496_proj2.Gallery.ImageUnit photo = ImgList.get(position);
 
-        mRequestManager
-                .load(photo.imageUri)
-                .into(holder.image);
-
-       // holder.image.setImageURI(photo.imageUri);
+        if(photo.imageUri != null) mRequestManager.load(photo.imageUri).into(holder.image);
+        else mRequestManager.load(photo.imagePath).into(holder.image);
     }
 
     @Override public int getItemCount() {
         return ImgList.size();
     }
-
-
-
 }

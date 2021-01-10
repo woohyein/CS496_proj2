@@ -14,8 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -28,24 +26,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.cs496_proj2.ApiService;
 import com.example.cs496_proj2.R;
-import com.example.cs496_proj2.contacts.AddContactActivity;
-import com.example.cs496_proj2.contacts.GlobalContacts;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -63,6 +54,7 @@ public class GalleryFragment extends Fragment {
     Button backup;
 
     ApiService apiService;
+    String user = "user1";
 
     public GalleryFragment() {
     }
@@ -133,7 +125,7 @@ public class GalleryFragment extends Fragment {
         downServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "복구", Toast.LENGTH_SHORT).show();
+                loadimage();
             }
         });
 
@@ -200,41 +192,29 @@ public class GalleryFragment extends Fragment {
 
     private void initRetrofitClient(){
         OkHttpClient client = new OkHttpClient.Builder().build();
-        apiService = new Retrofit.Builder().baseUrl("http://192.249.18.228:3001").client(client).build().create(ApiService.class);
+        apiService = new Retrofit.Builder().baseUrl("http://192.249.18.228:3001").addConverterFactory(GsonConverterFactory.create()).client(client).build().create(ApiService.class);
     }
 
-    public void postimage(Bitmap pickedImg) throws IOException {
-        File filesDir = getActivity().getApplicationContext().getFilesDir();
-        File file = new File(filesDir, "image" + ".png");
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        pickedImg.compress(Bitmap.CompressFormat.PNG, 0, baos);
-        byte[] b = baos.toByteArray();
-
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(b);
-        fos.flush();
-        fos.close();
-
-        RequestBody reqfile = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("upload", file.getName(), reqfile);
-        RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "upload");
-
-        Call<ResponseBody> req = apiService.postImage(body, name);
-
-        req.enqueue(new Callback<ResponseBody>(){
+    public void loadimage(){
+        Call<ArrayList<String>> req = apiService.loadImage(user);
+        req.enqueue(new Callback<ArrayList<String>>(){
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
                 if (response.code()==200){
                     Log.d("asdf", "성공!!");
+                    for(String tmp: response.body()){
+                        Log.d("asdf", "" + tmp + " / " + response.body().size());
+                        GlobalGallery.getInstance().addImage(new ImageUnit("http://192.249.18.228:3001/uploads/" + tmp));
+                    }
+                    Toast.makeText(getActivity(), "" + response.body().size() + "개의 사진을 복구했습니다", Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.detach(fg).attach(fg).commit();
                 }
-                // Toast.makeText(getActivity().getApplicationContext(), response.code() + " ", Toast.LENGTH_SHORT).show();
             }
-
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<ArrayList<String>> call, Throwable t) {
                 Log.d("asdf", "실패!!");
-                // Toast.makeText(getActivity().getApplicationContext(), "Request failed", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });

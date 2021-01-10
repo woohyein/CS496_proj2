@@ -56,6 +56,7 @@ public class ViewImage extends AppCompatActivity {
         Uri myUri = Uri.parse(s);
 //        photoView.setImageURI(myUri);
         Glide.with(this).load(s).into(photoView);
+        Log.d("asdf", s);
 
 
 
