@@ -1,11 +1,16 @@
 package com.example.cs496_proj2.Gallery;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.example.cs496_proj2.ApiService;
 import com.example.cs496_proj2.R;
 
@@ -33,18 +38,36 @@ public class BackupGalleryActivity extends AppCompatActivity {
     ApiService apiService;
     String user = "user1";
 
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    BackupImageAdapter adapter;
+    RequestManager glideRequestManager;
+
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backup_gallery);
+        context = BackupGalleryActivity.this;
+
         initRetrofitClient();
+        glideRequestManager = Glide.with(this);
 
         Log.d("asdf", "BackupGalleryActivity");
         loadimage();
-
-
     }
 
+    public void afterPhasing(){
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        layoutManager = new GridLayoutManager(getApplicationContext(), 3);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.scrollToPosition(0);
+
+        // Set Adapter
+        adapter = new BackupImageAdapter(glideRequestManager, imagePath, context, getApplicationContext());
+        recyclerView.setAdapter(adapter);
+    }
 
     private void initRetrofitClient(){
         OkHttpClient client = new OkHttpClient.Builder().build();
@@ -62,6 +85,7 @@ public class BackupGalleryActivity extends AppCompatActivity {
                         Log.d("asdf", "" + tmp + " / " + response.body().size());
                         imagePath.add(tmp);
                     }
+                    afterPhasing();
                 }
             }
             @Override
