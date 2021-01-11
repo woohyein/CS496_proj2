@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.cs496_proj2.GlobalId;
 import com.example.cs496_proj2.MainActivity;
 import com.example.cs496_proj2.R;
 
@@ -46,7 +48,6 @@ import java.util.LinkedHashSet;
 
 public class ContactFragment extends Fragment {
     View view;
-    String user = "user1";
     Fragment fg;
 
     private RecyclerView recyclerView;
@@ -223,7 +224,7 @@ public class ContactFragment extends Fragment {
                     try {
                         //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.accumulate("user", user);
+                        jsonObject.accumulate("user", GlobalId.getInstance().getId());
                         jsonObject.accumulate("phone", thisContact.phone);
                         jsonObject.accumulate("fullName", thisContact.fullName);
                         if(thisContact.image != null) jsonObject.accumulate("image", thisContact.image.toString());
@@ -341,7 +342,7 @@ public class ContactFragment extends Fragment {
                 try {
                     //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.accumulate("user", user);
+                    jsonObject.accumulate("user", GlobalId.getInstance().getId());
 
                     HttpURLConnection con = null;
                     BufferedReader reader = null;
@@ -398,7 +399,7 @@ public class ContactFragment extends Fragment {
                 try {
                     //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.accumulate("user", user);
+                    jsonObject.accumulate("user", GlobalId.getInstance().getId());
 
                     HttpURLConnection con = null;
                     BufferedReader reader = null;
