@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.example.cs496_proj2.GlobalId;
 import com.example.cs496_proj2.MainActivity;
 import com.example.cs496_proj2.ApiService;
 import com.example.cs496_proj2.R;
@@ -55,7 +56,6 @@ public class GalleryFragment extends Fragment {
     Button backup;
 
     ApiService apiService;
-    String user = "user1";
 
     public GalleryFragment() {
     }
@@ -197,7 +197,7 @@ public class GalleryFragment extends Fragment {
     }
 
     public void loadimage(){
-        Call<ArrayList<String>> req = apiService.loadImage(user);
+        Call<ArrayList<String>> req = apiService.loadImage(GlobalId.getInstance().getId());
         req.enqueue(new Callback<ArrayList<String>>(){
             @Override
             public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {

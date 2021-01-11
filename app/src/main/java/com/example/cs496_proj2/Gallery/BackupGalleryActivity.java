@@ -12,6 +12,7 @@ import android.util.Log;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.example.cs496_proj2.ApiService;
+import com.example.cs496_proj2.GlobalId;
 import com.example.cs496_proj2.R;
 
 import java.io.ByteArrayOutputStream;
@@ -36,7 +37,6 @@ public class BackupGalleryActivity extends AppCompatActivity {
 
     ArrayList<String> imagePath = new ArrayList<String>();
     ApiService apiService;
-    String user = "user1";
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -75,7 +75,7 @@ public class BackupGalleryActivity extends AppCompatActivity {
     }
 
     public void loadimage(){
-        Call<ArrayList<String>> req = apiService.loadImage(user);
+        Call<ArrayList<String>> req = apiService.loadImage(GlobalId.getInstance().getId());
         req.enqueue(new Callback<ArrayList<String>>(){
             @Override
             public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {

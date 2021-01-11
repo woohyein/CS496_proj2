@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.cs496_proj2.ApiService;
+import com.example.cs496_proj2.GlobalId;
 import com.example.cs496_proj2.R;
 import com.example.cs496_proj2.contacts.GlobalContacts;
 import com.github.chrisbanes.photoview.PhotoView;
@@ -36,8 +37,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class ViewImage extends AppCompatActivity {
-
-    String user = "user1";
 
     ApiService apiService;
     Bitmap pickedImg;
@@ -106,7 +105,7 @@ public class ViewImage extends AppCompatActivity {
 
         RequestBody reqfile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("upload", file.getName(), reqfile);
-        RequestBody name = RequestBody.create(MediaType.parse("text/plain"), user);
+        RequestBody name = RequestBody.create(MediaType.parse("text/plain"), GlobalId.getInstance().getId());
 
         Call<ResponseBody> req = apiService.postImage(body, name);
 

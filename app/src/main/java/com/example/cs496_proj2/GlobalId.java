@@ -1,7 +1,7 @@
 package com.example.cs496_proj2;
 
 public class GlobalId {
-    private String id;
+    private String id = "user1";
 
     public String getId() {
         return this.id;

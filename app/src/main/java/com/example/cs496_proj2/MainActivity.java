@@ -23,7 +23,6 @@ import com.google.android.material.tabs.TabLayoutMediator;
 public class MainActivity extends AppCompatActivity
     implements ActivityCompat.OnRequestPermissionsResultCallback {
     private static Context context;
-    String user_id = null;
 
     /* Permission variables */
     private static final int PERMISSIONS_REQUEST_CODE = 100;
