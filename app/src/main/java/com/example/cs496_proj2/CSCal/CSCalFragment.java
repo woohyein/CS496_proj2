@@ -286,6 +286,7 @@ public class CSCalFragment extends Fragment {
                         submit.setVisibility(View.INVISIBLE);
                         start.setVisibility(View.VISIBLE);
                         isLose = false;
+                        break;
                     }
 
                     verify.setVisibility(View.INVISIBLE);
@@ -326,6 +327,7 @@ public class CSCalFragment extends Fragment {
                 adapter.notifyDataSetChanged();
                 verify.setVisibility(View.VISIBLE);
                 start.setVisibility(View.INVISIBLE);
+                break;
         }
     }
 }
