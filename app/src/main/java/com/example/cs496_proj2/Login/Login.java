@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
     public static  AccessToken accessToken;
     private LoginCallback mLoginCallback;
     ServiceAPI mMyAPI;
-    String baseUrl = "http://192.249.18.209:3000";
+    String baseUrl = "http://192.249.18.228:3006";
 
     String str_id;
     String str_token;
@@ -78,12 +78,10 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-
             }
 
             @Override
             public void onError(FacebookException error) {
-
             }
 
             public void requestMe(AccessToken token) {
@@ -104,17 +102,6 @@ public class Login extends AppCompatActivity {
                 graphRequest.executeAsync();
             }
         });
-
-        /*
-        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-        if(isLoggedIn){ // Move to MainActivity
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("token", accessToken);
-            startActivity(intent);
-        }
-        else{ // Need Registration
-            Log.d("reg", "else isLoggedIn");
-        }*/
     }
 
     @Override

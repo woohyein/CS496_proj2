@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity
         // Require Permission
         GetPermission();
         //onRequestPermissionsResult(PERMISSIONS_REQUEST_CODE, REQUIRED_PERMISSIONS, grandResults);
-        //FacebookSdk.sdkInitialize(getApplicationContext());
-       // AppEventsLogger.activateApp(this);
     }
 
     public void onStop(){
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity
                     tab.setText("Gallery");
                     break;
                 case 2:
-                    tab.setText("Facebook");
+                    tab.setText("Word Game");
                     break;
             }
             viewPager.setCurrentItem(0);

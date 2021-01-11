@@ -44,12 +44,14 @@ public class CSCalFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private GameAdapter adapter;
-    ArrayList<String> log;
-    Button submit, verify;
+    ArrayList<String> log, data;
+    Button submit, verify, start;
     EditText answer;
-    GameAPI gameAPI;
-    String baseUrl = "http://192.249.18.209:3001";
+    GameAPI gameAPI1, gameAPI2;
+    String baseUrl = "http://192.249.18.228:3005";
+    String serverUrl = "http://192.249.18.228:3002";
     Boolean isVerified = false;
+    Boolean isLose = false;
 
 
     public CSCalFragment() {
@@ -70,13 +72,15 @@ public class CSCalFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_c_s_cal, container, false);
 
-        // Init layout & clickListener
+        // Init layout
         submit = view.findViewById(R.id.submit_button);
         verify = view.findViewById(R.id.verify_button);
+        start = view.findViewById(R.id.start_button);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_game);
         answer = (EditText) view.findViewById(R.id.answer);
         log = new ArrayList<String>();
-        initMyAPI(baseUrl);
+        data = new ArrayList<String>();
+        initMyAPI(baseUrl, serverUrl);
 
         // Set layout manager
         layoutManager = new LinearLayoutManager(getActivity());
@@ -93,6 +97,7 @@ public class CSCalFragment extends Fragment {
         // set clickListeners
         verify.setOnClickListener(this::m_onClick);
         submit.setOnClickListener(this::m_onClick);
+        start.setOnClickListener(this::m_onClick);
 
         return view;
     }
@@ -122,12 +127,21 @@ public class CSCalFragment extends Fragment {
         }
 
         // check whether the first char matches the last char of former word
-//        if (log.size() != 0){
-//            String last = log.get(log.size() - 1);
-//            if (last.charAt(last.length()-1) != answer.charAt(0)){
-//                isVerified = false;
-//            }
-//        }
+        if (log.size() != 0){
+            String last = log.get(log.size() - 1);
+            if (last.charAt(last.length()-1) != answer.charAt(0)){
+                isLose = true;
+                isVerified = true;
+                return;
+            }
+        }
+
+        // Compare from previous result
+        if (data.contains(answer)) {
+            isLose = true;
+            isVerified = true;
+            return;
+        }
 
         // check from wikipedia
         getWebCalls(answer);
@@ -138,7 +152,7 @@ public class CSCalFragment extends Fragment {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                Call<ResponseBody> rb = gameAPI.CheckVal(answer);
+                Call<ResponseBody> rb = gameAPI1.CheckVal(answer);
                 ResponseBody result = null;
                 String s = null;
                 try {
@@ -167,73 +181,151 @@ public class CSCalFragment extends Fragment {
         }
     }
 
-    // Server's turn & Save what we did (in server)
-    public String ServerTurn(char a){
-        String str = null;
+    public String ServerTurn(String a){
+        final String[] str = {null};
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                Call<ResponseBody> rb = gameAPI2.GetWord(a);
+                ResponseBody result = null;
+                String s = null;
+                try {
+                    result = rb.execute().body();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                try {
+                    s = result.string();
+                    str[0] = s;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
 
-        if (str == null){ // Out of word
+        Future future = service.submit(runnable);
+        try{
+            future.get();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if (str[0] == null || str[0].equals("NULL")){
             return "You win!";
         }
 
-        return str;
+        return str[0];
     }
 
-    public void initMyAPI(String baseUrl){
-        Retrofit retrofit = new Retrofit.Builder()
+    public void initMyAPI(String baseUrl, String serverUrl){
+        Retrofit retrofit1 = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        gameAPI = retrofit.create(GameAPI.class);
+        gameAPI1 = retrofit1.create(GameAPI.class);
+
+        Retrofit retrofit2 = new Retrofit.Builder()
+                .baseUrl(serverUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        gameAPI2 = retrofit2.create(GameAPI.class);
     }
 
     public void postLog(String mAnswer){
-            log.add("You : " + mAnswer);
-            adapter.notifyDataSetChanged();
+        log.add("You : " + mAnswer);
+        data.add(mAnswer);
+        adapter.notifyDataSetChanged();
     }
 
     public void postCom(String Serverturn){
-        // Time Delay
-        Handler mHandler = new Handler();
-        mHandler.postDelayed(new Runnable() {
+        log.add("Computer : " + Serverturn);
+        data.add(Serverturn);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void InitServer(){
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                log.add("Computer : " + Serverturn);
-                adapter.notifyDataSetChanged();
+                Call<ResponseBody> rb = gameAPI2.Init();
+                ResponseBody result = null;
+                try {
+                    result = rb.execute().body();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
-        }, 1000);
+        };
+
+        Future future = service.submit(runnable);
+        try{
+            future.get();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
     public void m_onClick(View view){
         String mAnswer = answer.getText().toString();
-        CheckValidate(answer.getText().toString());
 
         switch(view.getId()){
             case R.id.verify_button:
+                CheckValidate(answer.getText().toString());
+
                 // able to submit
                 if (isVerified) {
+                    postLog(mAnswer);
+                    recyclerView.scrollToPosition(adapter.getItemCount()-1);
+                    if(isLose){
+                        log.add("Computer : You Lose!");
+                        recyclerView.scrollToPosition(adapter.getItemCount()-1);
+                        verify.setVisibility(View.INVISIBLE);
+                        submit.setVisibility(View.INVISIBLE);
+                        start.setVisibility(View.VISIBLE);
+                        isLose = false;
+                    }
+
                     verify.setVisibility(View.INVISIBLE);
                     submit.setVisibility(View.VISIBLE);
                 }
-                else{
+
+                else{ // The word doesn't exist
                     Toast msg = Toast.makeText(getContext(), "Input is not valid", Toast.LENGTH_SHORT);
                     msg.show();
                     verify.setVisibility(View.VISIBLE);
                     submit.setVisibility(View.INVISIBLE);
+                    start.setVisibility(View.INVISIBLE);
                 }
+
+                isVerified = false;
                 break;
 
             case R.id.submit_button:
-                postLog(mAnswer);
-                String com = ServerTurn(mAnswer.charAt(mAnswer.length()-1));
+                String com = ServerTurn(mAnswer);
                 postCom(com);
-
-                verify.setVisibility(view.VISIBLE);
-                submit.setVisibility(view.INVISIBLE);
-
+                recyclerView.scrollToPosition(adapter.getItemCount()-1);
+                verify.setVisibility(View.VISIBLE);
+                submit.setVisibility(View.INVISIBLE);
                 answer.setText(null);
                 isVerified = false;
+
+                if (com.equals("You win!")||com.equals("You Lose!")){
+                    verify.setVisibility(View.INVISIBLE);
+                    start.setVisibility(View.VISIBLE);
+                }
                 break;
+
+            case R.id.start_button:
+                InitServer();
+                log.clear();
+                data.clear();
+                answer.setText(null);
+                adapter.notifyDataSetChanged();
+                verify.setVisibility(View.VISIBLE);
+                start.setVisibility(View.INVISIBLE);
         }
     }
 }
