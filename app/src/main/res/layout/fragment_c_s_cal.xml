@@ -92,8 +92,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginEnd="30dp" />
+        android:layout_marginBottom="30dp"
+        android:paddingRight="15dp"
+        android:src="@drawable/ranking"
+        />
 
-        </FrameLayout>
+</FrameLayout>
