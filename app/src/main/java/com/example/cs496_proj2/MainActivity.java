@@ -1,26 +1,30 @@
 package com.example.cs496_proj2;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.cs496_proj2.Login.Login;
+import com.facebook.login.LoginManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity
     implements ActivityCompat.OnRequestPermissionsResultCallback {
+    private static Context context;
+    String user_id = null;
+
     /* Permission variables */
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS = { Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -37,20 +41,27 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MainActivity.context = this;
+
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
 
         // Require Permission
         GetPermission();
         //onRequestPermissionsResult(PERMISSIONS_REQUEST_CODE, REQUIRED_PERMISSIONS, grandResults);
-        Log.d("asdf", "onCreate finish");
+        //FacebookSdk.sdkInitialize(getApplicationContext());
+       // AppEventsLogger.activateApp(this);
     }
 
+    public void onStop(){
+        super.onStop();
+        LoginManager.getInstance().logOut();
+    }
 
     public void afterCreate() {
-        Log.d("asdf", "onStart!");
         // TabLayout Initialization
         super.onStart();
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
 
         // ViewPager Initialization
         viewPager = (ViewPager2) findViewById(R.id.pager);
@@ -67,7 +78,7 @@ public class MainActivity extends AppCompatActivity
                     tab.setText("Gallery");
                     break;
                 case 2:
-                    tab.setText("CS_Cal");
+                    tab.setText("Facebook");
                     break;
             }
             viewPager.setCurrentItem(0);
@@ -90,14 +101,13 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    public void onResume(){
+        super.onResume();
+    }
+
     public void setViewPager (int pos) {
         viewPager.setAdapter(fgAdapter);
         viewPager.setCurrentItem(pos);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void GetPermission() {
@@ -140,7 +150,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(View view) {
                         // 3-3. 사용자에게 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                        ActivityCompat.requestPermissions(com.example.cs496_proj2.MainActivity.this, REQUIRED_PERMISSIONS,
+                        ActivityCompat.requestPermissions(MainActivity.this, REQUIRED_PERMISSIONS,
                                 PERMISSIONS_REQUEST_CODE);
                     }
                 }).show();
@@ -205,4 +215,9 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
+    public static Context getAppContext(){
+        return MainActivity.context;
+    }
+
 }

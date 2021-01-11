@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,52 +8,115 @@
     tools:context=".CSCal.CSCalFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="70dp"
-        android:fontFamily="casual"
-        android:gravity="center_horizontal"
-        android:text="welcome_to_cs_calculator"
-        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/masque"
+        android:layout_gravity="center_horizontal"
+        android:text=" Word Game "
+        android:layout_marginTop="10dp"
+        android:textAllCaps="true"
         android:textColor="#275793"
-        android:textSize="35sp"
+        android:textSize="43dp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="280dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_marginBottom="200dp"
-        android:fontFamily="monospace"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="numeral system"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:backgroundTint="#4C82B4"
-        tools:ignore="HardcodedText" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="level:"-->
+<!--        android:fontFamily="@font/masque"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textColor="#B0275793"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginTop="80dp"-->
+<!--        />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button2"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:text="High"-->
+<!--        android:textColor="#FFFFFFFF"-->
+<!--        android:backgroundTint="#8F8A8E"-->
+<!--        android:fontFamily="@font/masque"-->
+<!--        android:layout_marginLeft="110dp"-->
+<!--        android:layout_marginTop="73dp"-->
+<!--        android:textSize="15dp"-->
+<!--        />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button3"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:text="MEDIUM"-->
+<!--        android:textColor="#FFFFFFFF"-->
+<!--        android:backgroundTint="#708098"-->
+<!--        android:fontFamily="@font/masque"-->
+<!--        android:layout_marginLeft="200dp"-->
+<!--        android:layout_marginTop="73dp"-->
+<!--        android:textSize="13dp"-->
+<!--        />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button4"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:text="LOW"-->
+<!--        android:textColor="#FFFFFFFF"-->
+<!--        android:backgroundTint="#3D6075"-->
+<!--        android:fontFamily="@font/masque"-->
+<!--        android:layout_marginLeft="310dp"-->
+<!--        android:layout_marginTop="73dp"-->
+<!--        android:textSize="15dp"-->
+
+<!--        />-->
+    <EditText
+        android:id="@+id/answer"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:hint="Type your answer!"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="90dp"
+        android:fontFamily="@font/actor"
+        android:textSize="20dp"
+        />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="420dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="113dp"
-        android:layout_marginBottom="100dp"
-        android:fontFamily="monospace"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="bitwise operation"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="#4C82B4"
-        tools:ignore="HardcodedText" />
+        android:id="@+id/submit_button"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="Submit"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="280dp"
+        android:backgroundTint="#708098"
+        android:textAllCaps="false"
+        android:textSize="14dp"
+        android:fontFamily="@font/masque"
+        />
 
-</RelativeLayout>
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recycler_user"-->
+<!--        android:layout_width="160dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="170dp"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        />-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recycler_server"-->
+<!--        android:layout_width="160dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="170dp"-->
+<!--        android:layout_marginLeft="220dp"-->
+<!--        />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_game"
+        android:layout_width="330dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:layout_marginTop="160dp"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="outsideOverlay"
+        />
+
+        </FrameLayout>
