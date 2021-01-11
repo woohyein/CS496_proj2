@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".contacts.AddContactActivity">
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        android:foreground="?selectableItemBackground"
+        card_view:cardBackgroundColor="#FFFF"
+        card_view:cardCornerRadius="8dp"
+        card_view:contentPadding="10dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=" Score "
+                android:fontFamily="@font/masque"
+                android:gravity="center"
+                android:textSize="36dp"
+                android:textColor="#275793"
+                android:layout_marginBottom="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="3dp" >
+
+                <TextView
+                    android:id="@+id/player1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="1등 플레이어"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/score1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="점수"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="3dp" >
+
+                <TextView
+                    android:id="@+id/player2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="2등 플레이어"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/score2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="점수"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="3dp" >
+
+                <TextView
+                    android:id="@+id/player3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="3등 플레이어"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/score3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="점수"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="3dp" >
+
+                <TextView
+                    android:id="@+id/player4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="4등 플레이어"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/score4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="점수"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="3dp" >
+
+                <TextView
+                    android:id="@+id/player5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="5등 플레이어"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/score5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="점수"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="3dp" >
+
+                <TextView
+                    android:id="@+id/player6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="6등 플레이어"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/score6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="점수"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="3dp" >
+
+                <TextView
+                    android:id="@+id/player7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="7등 플레이어"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/score7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="점수"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="3dp" >
+
+                <TextView
+                    android:id="@+id/player8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="8등 플레이어"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/score8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="점수"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="3dp" >
+
+                <TextView
+                    android:id="@+id/player9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="9등 플레이어"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/score9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="점수"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="3dp" >
+
+                <TextView
+                    android:id="@+id/player10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="10등 플레이어"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/score10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="점수"
+                    android:textSize="24dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
