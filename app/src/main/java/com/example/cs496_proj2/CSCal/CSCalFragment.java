@@ -145,17 +145,24 @@ public class CSCalFragment extends Fragment {
             public void run() {
                 Call<ResponseBody> rb = gameAPI.CheckVal(answer);
                 ResponseBody result = null;
+                String s = null;
                 try {
                     result = rb.execute().body();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-                if (result.toString().equals("a")) {
-                    isVerified = false;
-                    Log.d("dfdf", "not vaild word");
-                } else {
-                    Log.d("adf", "success");
-                    isVerified = true;
+                try {
+                    s = result.string();
+                    Log.d("asdf", s);
+                    if (s.equals("a")) {
+                        isVerified = false;
+                        Log.d("dfdf", "not vaild word");
+                    } else {
+                        Log.d("adf", "success");
+                        isVerified = true;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         };
