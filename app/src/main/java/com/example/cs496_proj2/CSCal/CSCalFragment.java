@@ -1,5 +1,6 @@
 package com.example.cs496_proj2.CSCal;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,9 +23,13 @@ import com.example.cs496_proj2.CSCal.GameAPI;
 import com.example.cs496_proj2.MainActivity;
 import com.example.cs496_proj2.R;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.ResponseBody;
@@ -40,12 +45,13 @@ public class CSCalFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private GameAdapter adapter;
     ArrayList<String> log;
-    Button submit;
+    Button submit, verify;
     EditText answer;
     GameAPI gameAPI;
     String baseUrl = "http://192.249.18.209:3001";
     final int[] flag = {0};
     Boolean isVerified = false;
+
 
     public CSCalFragment() {
     }
@@ -67,6 +73,7 @@ public class CSCalFragment extends Fragment {
 
         // Init layout & clickListener
         submit = view.findViewById(R.id.submit_button);
+        verify = view.findViewById(R.id.verify_button);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_game);
         answer = (EditText) view.findViewById(R.id.answer);
         log = new ArrayList<String>();
@@ -81,48 +88,18 @@ public class CSCalFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         if (adapter.getItemCount() != 0){
-            //recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount()-1);
             recyclerView.scrollToPosition(adapter.getItemCount()-1);
         }
 
-
+        // set clickListeners
+        verify.setOnClickListener(this::m_onClick);
+        submit.setOnClickListener(this::m_onClick);
 
         return view;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // set clickListeners
-        submit.setOnClickListener(v -> {
-            String mAnswer = answer.getText().toString();
-            CheckValidate(mAnswer);
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-            if (isVerified) {
-                log.add("You : " + mAnswer);
-                adapter.notifyDataSetChanged();
-                // Time Delay
-                Handler mHandler = new Handler();
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        log.add("Computer : "+ ServerTurn(mAnswer.charAt(mAnswer.length()-1)));
-                        adapter.notifyDataSetChanged();
-                    }
-                }, 1000);
-            }
-            else{
-                Toast msg = Toast.makeText(getContext(), "Input is not valid", Toast.LENGTH_SHORT);
-                msg.show();
-            }
-
-            answer.setText(null);
-            isVerified = false;
-        });
-
     }
 
     @Override
@@ -131,16 +108,20 @@ public class CSCalFragment extends Fragment {
     }
 
     public void CheckValidate(String answer) {
-        isVerified = true;
+        //isVerified = false;
         // check null
         if (answer == null || (answer.length() == 0)) {
+            //return false;
             isVerified = false;
+            return;
         }
 
         // check blank char
         for (int i = 0; i < answer.length(); i++) {
             if (Character.isWhitespace(answer.charAt(i))) {
+                //return false;
                 isVerified = false;
+                return;
             }
         }
 
@@ -153,31 +134,76 @@ public class CSCalFragment extends Fragment {
         }*/
 
         // check from wikipedia
+        //return getwebcalls(answer);
         getwebcalls(answer);
-
     }
 
     private void getwebcalls(String answer){
-        Call<ResponseBody> rb = gameAPI.CheckVal(answer);
-        rb.enqueue(new Callback<ResponseBody>() {
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        Runnable runnable = new Runnable() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code()==200){
-                    isVerified = true;
-                    Log.d("adf", "success");
+            public void run() {
+                Call<ResponseBody> rb = gameAPI.CheckVal(answer);
+                ResponseBody result = null;
+                try {
+                    result = rb.execute().body();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
                 }
-                else{
-                    Log.d("123", "code: "+response.code());
+                if (result.toString().equals("a")) {
                     isVerified = false;
+                    Log.d("dfdf", "not vaild word");
+                } else {
+                    Log.d("adf", "success");
+                    isVerified = true;
                 }
             }
+        };
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("er", "Server failed " + t.getMessage());
-                isVerified = false;
-            }
-        });
+        Future future = service.submit(runnable);
+        try{
+            future.get();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        //};
+
+
+//        Call<ResponseBody> rb = gameAPI.CheckVal(answer);
+//        rb.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                if(response.code()==200){
+//                    try{    //response.body().toString();
+//                        if (response.body().toString().equals("a")){
+//                            isVerified = false;
+//                            Log.d("df", "not valid word");
+//                        }
+//                        else {
+//                            isVerified = true;
+//                            Log.d("adf", "success");
+//                        }
+//                    }
+//                    catch (NullPointerException e){
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//                else{
+//                    Log.d("123", "code: "+response.code());
+//                    isVerified = false;
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Log.e("er", "Server failed " + t.getMessage());
+//                isVerified = false;
+//            }
+//        });
+        //return isVerified;
+
+
     }
 
     // Server's turn & Save what we did (in server)
@@ -197,5 +223,55 @@ public class CSCalFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         gameAPI = retrofit.create(GameAPI.class);
+    }
+
+    public void postlog(String mAnswer){
+            log.add("You : " + mAnswer);
+            adapter.notifyDataSetChanged();
+    }
+
+    public void postcom(String mAnswer, String Serverturn){
+        // Time Delay
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                log.add("Computer : " + Serverturn);
+                adapter.notifyDataSetChanged();
+            }
+        }, 1000);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    public void m_onClick(View view){
+        String mAnswer = answer.getText().toString();
+        CheckValidate(answer.getText().toString());
+
+        switch(view.getId()){
+            case R.id.verify_button:
+                if (isVerified) { // able to submit
+                    verify.setVisibility(View.INVISIBLE);
+                    submit.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Toast msg = Toast.makeText(getContext(), "Input is not valid", Toast.LENGTH_SHORT);
+                    msg.show();
+                    verify.setVisibility(View.VISIBLE);
+                    submit.setVisibility(View.INVISIBLE);
+                }
+                break;
+
+            case R.id.submit_button:
+                postlog(mAnswer);
+                String com = ServerTurn(mAnswer.charAt(mAnswer.length()-1));
+                postcom(mAnswer, com);
+
+                verify.setVisibility(view.VISIBLE);
+                submit.setVisibility(view.INVISIBLE);
+
+                answer.setText(null);
+                isVerified = false;
+                break;
+        }
     }
 }

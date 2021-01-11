@@ -89,6 +89,20 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
         android:layout_marginLeft="110dp"
+        android:backgroundTint="#3D6075"
+        android:textAllCaps="false"
+        android:textSize="14dp"
+        android:fontFamily="@font/masque"
+        />
+
+    <Button
+        android:id="@+id/verify_button"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="Verify"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="110dp"
         android:backgroundTint="#708098"
         android:textAllCaps="false"
         android:textSize="14dp"
