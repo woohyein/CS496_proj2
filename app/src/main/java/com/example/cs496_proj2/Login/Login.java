@@ -51,6 +51,7 @@ public class Login extends AppCompatActivity {
     String str_id;
     String str_token;
     String str_appId;
+    String user_name;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,10 +91,16 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 Log.d("result", object.toString());
-
+                                try {
+                                    user_name = object.getString("name");
+                                    //Log.d("result", user_name);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                                 str_id = token.getUserId();
                                 str_token = token.getToken();
                                 str_appId = token.getApplicationId();
+
                             }
                         });
                 Bundle parameters = new Bundle();
@@ -134,6 +141,7 @@ public class Login extends AppCompatActivity {
                             Log.d("tag", "patch success");
                             Context con = getAppContext();
                             GlobalId.getInstance().setId(str_id);
+                            GlobalId.getInstance().setName(user_name);
                             finish();
                         }
                         else{
