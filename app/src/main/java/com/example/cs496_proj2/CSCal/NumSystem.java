@@ -16,6 +16,7 @@ public class NumSystem extends AppCompatActivity  {
     EditText binary;
     EditText hex;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
