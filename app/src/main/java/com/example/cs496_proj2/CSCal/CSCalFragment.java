@@ -159,6 +159,7 @@ public class CSCalFragment extends Fragment {
                         Log.d("dfdf", "not vaild word");
                     } else {
                         Log.d("adf", "success");
+
                         isVerified = true;
                     }
                 } catch (IOException e) {
