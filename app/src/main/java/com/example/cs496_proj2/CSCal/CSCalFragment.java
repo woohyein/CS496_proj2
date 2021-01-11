@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cs496_proj2.CSCal.GameAPI;
 import com.example.cs496_proj2.MainActivity;
 import com.example.cs496_proj2.R;
+import com.example.cs496_proj2.contacts.AddContactActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -98,6 +100,15 @@ public class CSCalFragment extends Fragment {
         verify.setOnClickListener(this::m_onClick);
         submit.setOnClickListener(this::m_onClick);
         start.setOnClickListener(this::m_onClick);
+
+        FloatingActionButton btn = (FloatingActionButton) view.findViewById(R.id.score);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ScoreListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
