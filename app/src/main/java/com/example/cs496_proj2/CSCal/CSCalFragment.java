@@ -49,7 +49,6 @@ public class CSCalFragment extends Fragment {
     EditText answer;
     GameAPI gameAPI;
     String baseUrl = "http://192.249.18.209:3001";
-    final int[] flag = {0};
     Boolean isVerified = false;
 
 
@@ -108,10 +107,8 @@ public class CSCalFragment extends Fragment {
     }
 
     public void CheckValidate(String answer) {
-        //isVerified = false;
         // check null
         if (answer == null || (answer.length() == 0)) {
-            //return false;
             isVerified = false;
             return;
         }
@@ -119,26 +116,24 @@ public class CSCalFragment extends Fragment {
         // check blank char
         for (int i = 0; i < answer.length(); i++) {
             if (Character.isWhitespace(answer.charAt(i))) {
-                //return false;
                 isVerified = false;
                 return;
             }
         }
 
         // check whether the first char matches the last char of former word
- /*       if (log.size() != 0){
-            String last = log.get(log.size() - 1);
-            if (last.charAt(last.length()-1) != answer.charAt(0)){
-                isVerified = false;
-            }
-        }*/
+//        if (log.size() != 0){
+//            String last = log.get(log.size() - 1);
+//            if (last.charAt(last.length()-1) != answer.charAt(0)){
+//                isVerified = false;
+//            }
+//        }
 
         // check from wikipedia
-        //return getwebcalls(answer);
-        getwebcalls(answer);
+        getWebCalls(answer);
     }
 
-    private void getwebcalls(String answer){
+    private void getWebCalls(String answer){
         ExecutorService service = Executors.newSingleThreadExecutor();
         Runnable runnable = new Runnable() {
             @Override
@@ -153,13 +148,9 @@ public class CSCalFragment extends Fragment {
                 }
                 try {
                     s = result.string();
-                    Log.d("asdf", s);
                     if (s.equals("a")) {
                         isVerified = false;
-                        Log.d("dfdf", "not vaild word");
                     } else {
-                        Log.d("adf", "success");
-
                         isVerified = true;
                     }
                 } catch (IOException e) {
@@ -174,44 +165,6 @@ public class CSCalFragment extends Fragment {
         } catch (Exception e){
             e.printStackTrace();
         }
-        //};
-
-
-//        Call<ResponseBody> rb = gameAPI.CheckVal(answer);
-//        rb.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                if(response.code()==200){
-//                    try{    //response.body().toString();
-//                        if (response.body().toString().equals("a")){
-//                            isVerified = false;
-//                            Log.d("df", "not valid word");
-//                        }
-//                        else {
-//                            isVerified = true;
-//                            Log.d("adf", "success");
-//                        }
-//                    }
-//                    catch (NullPointerException e){
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//                else{
-//                    Log.d("123", "code: "+response.code());
-//                    isVerified = false;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                Log.e("er", "Server failed " + t.getMessage());
-//                isVerified = false;
-//            }
-//        });
-        //return isVerified;
-
-
     }
 
     // Server's turn & Save what we did (in server)
@@ -233,12 +186,12 @@ public class CSCalFragment extends Fragment {
         gameAPI = retrofit.create(GameAPI.class);
     }
 
-    public void postlog(String mAnswer){
+    public void postLog(String mAnswer){
             log.add("You : " + mAnswer);
             adapter.notifyDataSetChanged();
     }
 
-    public void postcom(String mAnswer, String Serverturn){
+    public void postCom(String Serverturn){
         // Time Delay
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
@@ -257,7 +210,8 @@ public class CSCalFragment extends Fragment {
 
         switch(view.getId()){
             case R.id.verify_button:
-                if (isVerified) { // able to submit
+                // able to submit
+                if (isVerified) {
                     verify.setVisibility(View.INVISIBLE);
                     submit.setVisibility(View.VISIBLE);
                 }
@@ -270,9 +224,9 @@ public class CSCalFragment extends Fragment {
                 break;
 
             case R.id.submit_button:
-                postlog(mAnswer);
+                postLog(mAnswer);
                 String com = ServerTurn(mAnswer.charAt(mAnswer.length()-1));
-                postcom(mAnswer, com);
+                postCom(com);
 
                 verify.setVisibility(view.VISIBLE);
                 submit.setVisibility(view.INVISIBLE);

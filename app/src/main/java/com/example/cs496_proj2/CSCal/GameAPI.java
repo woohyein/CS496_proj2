@@ -9,7 +9,7 @@ import retrofit2.Call;
 
 public interface GameAPI {
     @GET("/game/{char}")
-    Call<ResponseBody> getword(@Path("char") char word);
+    Call<ResponseBody> GetWord(@Path("char") char word);
 
     @GET("/game/{str}")
     Call<ResponseBody> CheckVal(@Path("str") String str);

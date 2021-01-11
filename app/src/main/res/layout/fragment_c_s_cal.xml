@@ -19,56 +19,6 @@
         android:textSize="43dp"
         android:textStyle="bold" />
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="level:"-->
-<!--        android:fontFamily="@font/masque"-->
-<!--        android:textSize="20dp"-->
-<!--        android:textColor="#B0275793"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginTop="80dp"-->
-<!--        />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button2"-->
-<!--        android:layout_width="80dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:text="High"-->
-<!--        android:textColor="#FFFFFFFF"-->
-<!--        android:backgroundTint="#8F8A8E"-->
-<!--        android:fontFamily="@font/masque"-->
-<!--        android:layout_marginLeft="110dp"-->
-<!--        android:layout_marginTop="73dp"-->
-<!--        android:textSize="15dp"-->
-<!--        />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button3"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:text="MEDIUM"-->
-<!--        android:textColor="#FFFFFFFF"-->
-<!--        android:backgroundTint="#708098"-->
-<!--        android:fontFamily="@font/masque"-->
-<!--        android:layout_marginLeft="200dp"-->
-<!--        android:layout_marginTop="73dp"-->
-<!--        android:textSize="13dp"-->
-<!--        />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button4"-->
-<!--        android:layout_width="80dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:text="LOW"-->
-<!--        android:textColor="#FFFFFFFF"-->
-<!--        android:backgroundTint="#3D6075"-->
-<!--        android:fontFamily="@font/masque"-->
-<!--        android:layout_marginLeft="310dp"-->
-<!--        android:layout_marginTop="73dp"-->
-<!--        android:textSize="15dp"-->
-
-<!--        />-->
     <EditText
         android:id="@+id/answer"
         android:layout_width="220dp"
@@ -109,21 +59,6 @@
         android:fontFamily="@font/masque"
         />
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recycler_user"-->
-<!--        android:layout_width="160dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="170dp"-->
-<!--        android:layout_marginLeft="30dp"-->
-<!--        />-->
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recycler_server"-->
-<!--        android:layout_width="160dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="170dp"-->
-<!--        android:layout_marginLeft="220dp"-->
-<!--        />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_game"
