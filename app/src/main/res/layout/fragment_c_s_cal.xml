@@ -71,10 +71,11 @@
 <!--        />-->
     <EditText
         android:id="@+id/answer"
-        android:layout_width="230dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:hint="Type your answer!"
-        android:layout_marginLeft="30dp"
+        android:layout_marginRight="50dp"
         android:layout_marginTop="90dp"
         android:fontFamily="@font/actor"
         android:textSize="20dp"
@@ -85,8 +86,9 @@
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:text="Submit"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="280dp"
+        android:layout_marginLeft="110dp"
         android:backgroundTint="#708098"
         android:textAllCaps="false"
         android:textSize="14dp"
@@ -111,7 +113,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_game"
-        android:layout_width="330dp"
+        android:layout_width="300dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="match_parent"
         android:layout_marginTop="160dp"
