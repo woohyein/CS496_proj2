@@ -44,4 +44,4 @@
 만약 실행되고 있는 앱을 백그라운드로 보내면, 현재 로그인되어 있는 계정은 로그아웃되며 끝말잇기 게임 또한 초기화됩니다.
 
 ### 설치
-CS496_proj2/app/release/apk
+`CS496_proj2/app/release/app-release.apk` 에서 apk 파일을 다운로드할 수 있습니다.
