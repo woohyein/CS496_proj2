@@ -55,6 +55,7 @@ public class CSCalFragment extends Fragment {
     String serverUrl = "http://192.249.18.228:3002";
     Boolean isVerified = false;
     Boolean isLose = false;
+    int level = 0;
 
 
     public CSCalFragment() {
@@ -107,6 +108,7 @@ public class CSCalFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ScoreListActivity.class);
+                intent.putExtra("level", level);
                 startActivity(intent);
             }
         });
@@ -121,6 +123,8 @@ public class CSCalFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        level = data.getExtras().getInt("level");
+        Log.d("asdf", "" + level);
     }
 
     public void CheckValidate(String answer) {
@@ -356,4 +360,5 @@ public class CSCalFragment extends Fragment {
                 break;
         }
     }
+
 }

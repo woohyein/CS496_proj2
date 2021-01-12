@@ -2,6 +2,7 @@ package com.example.cs496_proj2.CSCal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -70,19 +71,26 @@ public class ChooseCharActivity extends AppCompatActivity {
     }
 
     public void m_onClick(View view){
+        Intent intent = new Intent();
         switch (view.getId()){
             case R.id.easy:
                 InitServer(0);
+                intent.putExtra("level", 0);
+                setResult(1111, intent);
                 finish();
                 break;
 
             case R.id.normal:
                 InitServer(1);
+                intent.putExtra("level", 1);
+                setResult(1111, intent);
                 finish();
                 break;
 
             case R.id.hard:
                 InitServer(2);
+                intent.putExtra("level", 2);
+                setResult(1111, intent);
                 finish();
                 break;
         }
