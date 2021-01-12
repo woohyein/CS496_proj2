@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="1등 플레이어"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="점수"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -75,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="2등 플레이어"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="점수"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -100,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="3등 플레이어"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -109,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="점수"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -125,7 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="4등 플레이어"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -134,7 +134,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="점수"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -150,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="5등 플레이어"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -159,7 +159,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="점수"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -175,7 +175,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="6등 플레이어"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -184,7 +184,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="점수"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -200,7 +200,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="7등 플레이어"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -209,7 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="점수"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -225,7 +225,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="8등 플레이어"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -234,7 +234,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="점수"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -250,7 +250,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="9등 플레이어"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -259,7 +259,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="점수"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -275,7 +275,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="10등 플레이어"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -284,7 +284,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="점수"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
