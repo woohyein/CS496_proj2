@@ -14,8 +14,8 @@ public interface GameAPI {
     @GET("/game/{str}")
     Call<ResponseBody> CheckVal(@Path("str") String str);
 
-    @POST("/game/score/{userid}")
-    Call<ResponseBody> PostScore(@Path("userid") String gobalid, String score);
+    @GET ("/game/{player}/{score}")
+    Call<ResponseBody> PostScore(@Path("player") String name, @Path("score") int score);
 
     @GET("/start")
     Call<ResponseBody> Init();

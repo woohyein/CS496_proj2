@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs496_proj2.CSCal.GameAPI;
+import com.example.cs496_proj2.GlobalId;
 import com.example.cs496_proj2.MainActivity;
 import com.example.cs496_proj2.R;
 import com.example.cs496_proj2.contacts.AddContactActivity;
@@ -278,6 +279,31 @@ public class CSCalFragment extends Fragment {
         }
     }
 
+    public void sendscore(int mscore){
+        Log.d("asdf", "sendscore");
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                Call<ResponseBody> rb = gameAPI2.PostScore(GlobalId.getInstance().getName(), mscore);
+                ResponseBody result = null;
+                try {
+                    result = rb.execute().body();
+                    Log.d("asdf", "sendscore2");
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        };
+
+        Future future = service.submit(runnable);
+        try{
+            future.get();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @SuppressLint("NonConstantResourceId")
     public void m_onClick(View view){
         String mAnswer = answer.getText().toString();
@@ -292,10 +318,12 @@ public class CSCalFragment extends Fragment {
                     recyclerView.scrollToPosition(adapter.getItemCount()-1);
                     if(isLose){
                         log.add("Computer : You Lose!");
+                        Log.d("asdf","adf");
                         recyclerView.scrollToPosition(adapter.getItemCount()-1);
                         verify.setVisibility(View.INVISIBLE);
                         submit.setVisibility(View.INVISIBLE);
                         start.setVisibility(View.VISIBLE);
+                        sendscore(0);
                         isLose = false;
                         break;
                     }
@@ -327,6 +355,12 @@ public class CSCalFragment extends Fragment {
                 if (com.equals("You win!")||com.equals("You Lose!")){
                     verify.setVisibility(View.INVISIBLE);
                     start.setVisibility(View.VISIBLE);
+                    if(com.equals("You win!")){
+                        sendscore(log.size()/2);
+                    }
+                    else{
+                        sendscore(0);
+                    }
                 }
                 break;
 
