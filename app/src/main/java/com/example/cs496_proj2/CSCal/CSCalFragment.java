@@ -268,7 +268,7 @@ public class CSCalFragment extends Fragment {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                Call<ResponseBody> rb = gameAPI2.PostScore(GlobalId.getInstance().getName(), mscore);
+                Call<ResponseBody> rb = gameAPI2.PostScore(GlobalId.getInstance().getName(), mscore, level);
                 ResponseBody result = null;
                 try {
                     result = rb.execute().body();
