@@ -77,7 +77,6 @@
         android:visibility="visible"
         />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_game"
         android:layout_width="300dp"
