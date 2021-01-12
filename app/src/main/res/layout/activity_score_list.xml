@@ -43,14 +43,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp" >
+                android:layout_margin="1dp" >
 
                 <TextView
                     android:id="@+id/player1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="1등 플레이어"
-                    android:textSize="20dp"
+                    android:text="1st:   -"
+                    android:textSize="24dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -58,8 +60,9 @@
                     android:id="@+id/score1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="점수"
-                    android:textSize="20dp"
+                    android:text="-"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -68,14 +71,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp" >
+                android:layout_margin="1dp" >
 
                 <TextView
                     android:id="@+id/player2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="2등 플레이어"
-                    android:textSize="20dp"
+                    android:text="2nd:   -"
+                    android:textSize="24dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -83,8 +88,9 @@
                     android:id="@+id/score2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="점수"
-                    android:textSize="20dp"
+                    android:text="-"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -93,14 +99,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp" >
+                android:layout_margin="1dp" >
 
                 <TextView
                     android:id="@+id/player3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="3등 플레이어"
-                    android:textSize="20dp"
+                    android:text="3rd:   -"
+                    android:textSize="24dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -108,8 +116,9 @@
                     android:id="@+id/score3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="점수"
-                    android:textSize="20dp"
+                    android:text="-"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -118,14 +127,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp" >
+                android:layout_margin="1dp" >
 
                 <TextView
                     android:id="@+id/player4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="4등 플레이어"
-                    android:textSize="20dp"
+                    android:text="4th:   -"
+                    android:textSize="24dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -133,8 +144,9 @@
                     android:id="@+id/score4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="점수"
-                    android:textSize="20dp"
+                    android:text="-"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -143,14 +155,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp" >
+                android:layout_margin="1dp" >
 
                 <TextView
                     android:id="@+id/player5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="5등 플레이어"
-                    android:textSize="20dp"
+                    android:text="5th:   -"
+                    android:textSize="24dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -158,8 +172,9 @@
                     android:id="@+id/score5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="점수"
-                    android:textSize="20dp"
+                    android:text="-"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -168,14 +183,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp" >
+                android:layout_margin="1dp" >
 
                 <TextView
                     android:id="@+id/player6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="6등 플레이어"
-                    android:textSize="20dp"
+                    android:text="6th:   -"
+                    android:textSize="24dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -183,8 +200,9 @@
                     android:id="@+id/score6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="점수"
-                    android:textSize="20dp"
+                    android:text="-"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -193,14 +211,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp" >
+                android:layout_margin="1dp" >
 
                 <TextView
                     android:id="@+id/player7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="7등 플레이어"
-                    android:textSize="20dp"
+                    android:text="7th:   -"
+                    android:textSize="24dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -208,8 +228,9 @@
                     android:id="@+id/score7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="점수"
-                    android:textSize="20dp"
+                    android:text="-"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -218,14 +239,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp" >
+                android:layout_margin="1dp" >
 
                 <TextView
                     android:id="@+id/player8"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="8등 플레이어"
-                    android:textSize="20dp"
+                    android:text="8th:   -"
+                    android:textSize="24dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -233,8 +256,9 @@
                     android:id="@+id/score8"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="점수"
-                    android:textSize="20dp"
+                    android:text="-"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -243,14 +267,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp" >
+                android:layout_margin="1dp" >
 
                 <TextView
                     android:id="@+id/player9"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="9등 플레이어"
-                    android:textSize="20dp"
+                    android:text="9th:   -"
+                    android:textSize="24dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -258,8 +284,9 @@
                     android:id="@+id/score9"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="점수"
-                    android:textSize="20dp"
+                    android:text="-"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>
@@ -268,14 +295,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp" >
+                android:layout_margin="1dp" >
 
                 <TextView
                     android:id="@+id/player10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="10등 플레이어"
-                    android:textSize="20dp"
+                    android:text="10th:  -"
+                    android:textSize="24dp"
+                    android:maxLines="1"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="1"/>
 
@@ -283,8 +312,9 @@
                     android:id="@+id/score10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="점수"
-                    android:textSize="20dp"
+                    android:text="-"
+                    android:textSize="24dp"
+                    android:fontFamily="@font/vt_regular"
                     android:textColor="@color/black"
                     android:layout_weight="5"/>
             </LinearLayout>

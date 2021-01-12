@@ -209,61 +209,61 @@ public class ScoreListActivity extends AppCompatActivity {
 
         TextView player1 = findViewById(R.id.player1);
         TextView score1 = findViewById(R.id.score1);
-        player1.setText("1st: "+ playerList.get(i));
+        player1.setText("1st:   "+ playerList.get(i));
         score1.setText(scoreList.get(i));
         i++;
 
         TextView player2 = findViewById(R.id.player2);
         TextView score2 = findViewById(R.id.score2);
-        player2.setText("2nd: "+ playerList.get(i));
+        player2.setText("2nd:   "+ playerList.get(i));
         score2.setText(scoreList.get(i));
         i++;
 
         TextView player3 = findViewById(R.id.player3);
         TextView score3 = findViewById(R.id.score3);
-        player3.setText("3rd: "+ playerList.get(i));
+        player3.setText("3rd:   "+ playerList.get(i));
         score3.setText(scoreList.get(i));
         i++;
 
         TextView player4 = findViewById(R.id.player4);
         TextView score4 = findViewById(R.id.score4);
-        player4.setText("4th: "+ playerList.get(i));
+        player4.setText("4th:   "+ playerList.get(i));
         score4.setText(scoreList.get(i));
         i++;
 
         TextView player5 = findViewById(R.id.player5);
         TextView score5 = findViewById(R.id.score5);
-        player5.setText("5th: "+ playerList.get(i));
+        player5.setText("5th:   "+ playerList.get(i));
         score5.setText(scoreList.get(i));
         i++;
 
         TextView player6 = findViewById(R.id.player6);
         TextView score6 = findViewById(R.id.score6);
-        player6.setText("6th: "+ playerList.get(i));
+        player6.setText("6th:   "+ playerList.get(i));
         score6.setText(scoreList.get(i));
         i++;
 
         TextView player7 = findViewById(R.id.player7);
         TextView score7 = findViewById(R.id.score7);
-        player7.setText("7th: "+ playerList.get(i));
+        player7.setText("7th:   "+ playerList.get(i));
         score7.setText(scoreList.get(i));
         i++;
 
         TextView player8 = findViewById(R.id.player8);
         TextView score8 = findViewById(R.id.score8);
-        player8.setText("8th: "+ playerList.get(i));
+        player8.setText("8th:   "+ playerList.get(i));
         score8.setText(scoreList.get(i));
         i++;
 
         TextView player9 = findViewById(R.id.player9);
         TextView score9 = findViewById(R.id.score9);
-        player9.setText("9th: "+ playerList.get(i));
+        player9.setText("9th:   "+ playerList.get(i));
         score9.setText(scoreList.get(i));
         i++;
 
         TextView player10 = findViewById(R.id.player10);
         TextView score10 = findViewById(R.id.score10);
-        player10.setText("10th: "+ playerList.get(i));
+        player10.setText("10th:  "+ playerList.get(i));
         score10.setText(scoreList.get(i));
     }
 }
