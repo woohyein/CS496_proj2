@@ -6,10 +6,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.cs496_proj2.GlobalId;
 import com.example.cs496_proj2.R;
 import com.example.cs496_proj2.contacts.Contact;
+import com.example.cs496_proj2.contacts.ContactFragment;
 import com.example.cs496_proj2.contacts.GlobalContacts;
 
 import org.json.JSONArray;
@@ -38,18 +40,19 @@ public class ScoreListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_list);
 
-
+        getPlayerScore();
     }
 
     public void getPlayerScore() {
-
+        new ScoreListActivity.JSONTask().execute("http://192.249.18.228:3003/take");//AsyncTask 시작시킴
+        new ScoreListActivity.JSONTask().execute("http://192.249.18.228:3003/receive");//AsyncTask 시작시킴
     }
 
     public class JSONTask extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... urls) {
-            if(urls[0].equals("http://192.249.18.228:3000/receive")) {
+            if(urls[0].equals("http://192.249.18.228:3003/receive")) {
                 try {
                     HttpURLConnection con = null;
                     BufferedReader reader = null;
@@ -105,7 +108,7 @@ public class ScoreListActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else if(urls[0].equals("http://192.249.18.228:3000/take")){
+            } else if(urls[0].equals("http://192.249.18.228:3003/take")){
                 try {
                     //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
                     JSONObject jsonObject = new JSONObject();
@@ -176,27 +179,91 @@ public class ScoreListActivity extends AppCompatActivity {
     private void jsonParsing(String json)
     {
         try{
-            ArrayList<Contact> newContact = new ArrayList<Contact>();
-
             JSONObject jsonObject = new JSONObject(json);
-            JSONArray contactArray = jsonObject.getJSONArray("player_score");
-            for(int i=0; i<contactArray.length(); i++) {
-                JSONObject contactObject = contactArray.getJSONObject(i);
+            JSONArray player_scoreArray = jsonObject.getJSONArray("player_score");
+            for(int i=0; i<player_scoreArray.length(); i++) {
+                JSONObject player_scoreObject = player_scoreArray.getJSONObject(i);
 
-                Contact contact;
-                String image = contactObject.getString("image");
-                if(image.equals("null")) contact = new Contact(contactObject.getString("phone"), contactObject.getString("fullName"), null);
-                else contact = new Contact(contactObject.getString("phone"), contactObject.getString("fullName"), image);
+                String tmpPlayer = player_scoreObject.getString("player");
+                String tmpScore = player_scoreObject.getString("score");
 
-                Log.d("asdf", contact.getMsg());
+                Log.d("asdf", tmpPlayer + " / " + tmpScore);
 
-                newContact.add(contact);
+                playerList.add(tmpPlayer);
+                scoreList.add(tmpScore);
             }
 
-            GlobalContacts.getInstance().setContacts(newContact);
-
+            viewMake();
         }catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void viewMake() {
+        int i=0;
+        for(i=playerList.size(); i<10; i++){
+            playerList.add("-");
+            scoreList.add("-");
+        }
+        i=0;
+
+        TextView player1 = findViewById(R.id.player1);
+        TextView score1 = findViewById(R.id.score1);
+        player1.setText("1st: "+ playerList.get(i));
+        score1.setText(scoreList.get(i));
+        i++;
+
+        TextView player2 = findViewById(R.id.player2);
+        TextView score2 = findViewById(R.id.score2);
+        player2.setText("2nd: "+ playerList.get(i));
+        score2.setText(scoreList.get(i));
+        i++;
+
+        TextView player3 = findViewById(R.id.player3);
+        TextView score3 = findViewById(R.id.score3);
+        player3.setText("3rd: "+ playerList.get(i));
+        score3.setText(scoreList.get(i));
+        i++;
+
+        TextView player4 = findViewById(R.id.player4);
+        TextView score4 = findViewById(R.id.score4);
+        player4.setText("4th: "+ playerList.get(i));
+        score4.setText(scoreList.get(i));
+        i++;
+
+        TextView player5 = findViewById(R.id.player5);
+        TextView score5 = findViewById(R.id.score5);
+        player5.setText("5th: "+ playerList.get(i));
+        score5.setText(scoreList.get(i));
+        i++;
+
+        TextView player6 = findViewById(R.id.player6);
+        TextView score6 = findViewById(R.id.score6);
+        player6.setText("6th: "+ playerList.get(i));
+        score6.setText(scoreList.get(i));
+        i++;
+
+        TextView player7 = findViewById(R.id.player7);
+        TextView score7 = findViewById(R.id.score7);
+        player7.setText("7th: "+ playerList.get(i));
+        score7.setText(scoreList.get(i));
+        i++;
+
+        TextView player8 = findViewById(R.id.player8);
+        TextView score8 = findViewById(R.id.score8);
+        player8.setText("8th: "+ playerList.get(i));
+        score8.setText(scoreList.get(i));
+        i++;
+
+        TextView player9 = findViewById(R.id.player9);
+        TextView score9 = findViewById(R.id.score9);
+        player9.setText("9th: "+ playerList.get(i));
+        score9.setText(scoreList.get(i));
+        i++;
+
+        TextView player10 = findViewById(R.id.player10);
+        TextView score10 = findViewById(R.id.score10);
+        player10.setText("10th: "+ playerList.get(i));
+        score10.setText(scoreList.get(i));
     }
 }
