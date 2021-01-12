@@ -59,9 +59,6 @@ public class ScoreListActivity extends AppCompatActivity {
         protected String doInBackground(String... urls) {
             if(urls[0].equals("http://192.249.18.228:3003/receive")) {
                 try {
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.accumulate("level", level);
-
                     HttpURLConnection con = null;
                     BufferedReader reader = null;
 
@@ -76,17 +73,9 @@ public class ScoreListActivity extends AppCompatActivity {
                         con.setRequestProperty("Content-Type", "application/json");//application JSON 형식으로 전송
 
                         con.setRequestProperty("Accept", "text/html");//서버에 response 데이터를 html로 받음
-                        con.setDoOutput(true);//Outstream으로 post 데이터를 넘겨주겠다는 의미
+                        con.setDoOutput(false);//Outstream으로 post 데이터를 넘겨주겠다는 의미
                         con.setDoInput(true);//Inputstream으로 서버로부터 응답을 받겠다는 의미
                         con.connect();
-
-                        //서버로 보내기위해서 스트림 만듬
-                        OutputStream outStream = con.getOutputStream();
-                        //버퍼를 생성하고 넣음
-                        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream));
-                        writer.write(jsonObject.toString());
-                        writer.flush();
-                        writer.close();//버퍼를 받아줌
 
                         //서버로 부터 데이터를 받음
                         InputStream stream = con.getInputStream();
@@ -128,7 +117,7 @@ public class ScoreListActivity extends AppCompatActivity {
                 try {
                     //JSONObject를 만들고 key value 형식으로 값을 저장해준다.
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.accumulate("user", GlobalId.getInstance().getId());
+                    jsonObject.accumulate("level", level);
 
                     HttpURLConnection con = null;
                     BufferedReader reader = null;
