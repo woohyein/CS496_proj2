@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -80,6 +81,8 @@ public class MainActivity extends AppCompatActivity
             }
             viewPager.setCurrentItem(0);
         }).attach();
+        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#A46260"));
+        tabLayout.setTabTextColors(Color.parseColor("#435256"), Color.parseColor("#A46260"));
 
         // TabSelectedListener Initialization
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

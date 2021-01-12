@@ -49,7 +49,7 @@
             android:id="@+id/callButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="#98DDDD"
+            android:background="#B5CCD4"
             android:scaleType="fitCenter"
             android:layout_gravity="center"
             app:layout_constraintStart_toEndOf="@+id/numTextView"

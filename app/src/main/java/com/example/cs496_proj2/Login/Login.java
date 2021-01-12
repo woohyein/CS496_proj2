@@ -133,6 +133,7 @@ public class Login extends AppCompatActivity {
 
         switch(view.getId()){
             case R.id.mybutton:
+
                 Call<ResponseBody> rb = mMyAPI.login(str_id, str_token, str_appId);
                 rb.enqueue(new Callback<ResponseBody>() {
                     @Override

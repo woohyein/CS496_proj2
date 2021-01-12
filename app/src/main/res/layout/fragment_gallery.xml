@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="#CAEDEA">
+        android:background="#E3EAEA">
 
         <Button
             android:id="@+id/camera"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="카메라"
             android:layout_margin="5dp"
-            android:backgroundTint="@color/teal_200"
+            android:backgroundTint="#597484"
             android:fontFamily="@font/nanumsqure_r"
             android:layout_weight="1" />
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:text="백업된 이미지"
             android:layout_margin="5dp"
-            android:backgroundTint="@color/teal_200"
+            android:backgroundTint="#597484"
             android:fontFamily="@font/nanumsqure_r"
             android:layout_weight="1" />
 
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:text="복구"
             android:layout_margin="5dp"
-            android:backgroundTint="@color/teal_200"
+            android:backgroundTint="#597484"
             android:fontFamily="@font/nanumsqure_r"
             android:layout_weight="1" />
     </LinearLayout>
