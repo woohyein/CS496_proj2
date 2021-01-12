@@ -44,7 +44,6 @@ public class Login extends AppCompatActivity {
     private LoginButton loginButton;
     private Button mybutton;
     public static  AccessToken accessToken;
-    private LoginCallback mLoginCallback;
     ServiceAPI mMyAPI;
     String baseUrl = "http://192.249.18.228:3006";
 
@@ -143,7 +142,7 @@ public class Login extends AppCompatActivity {
                             Context con = getAppContext();
                             GlobalId.getInstance().setId(str_id);
                             GlobalId.getInstance().setName(user_name);
-                            finish();
+                            //finish();
                         }
                         else{
                             Log.d("tag", "Status code: "+response.code());
@@ -155,6 +154,8 @@ public class Login extends AppCompatActivity {
                         Log.d("tag", "Fail msg: "+t.getMessage());
                     }
                 });
+
+                finish();
         }
     }
 }

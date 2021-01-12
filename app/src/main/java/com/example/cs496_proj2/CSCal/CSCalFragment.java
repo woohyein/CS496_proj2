@@ -256,28 +256,7 @@ public class CSCalFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    public void InitServer(){
-        ExecutorService service = Executors.newSingleThreadExecutor();
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                Call<ResponseBody> rb = gameAPI2.Init();
-                ResponseBody result = null;
-                try {
-                    result = rb.execute().body();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
-        };
 
-        Future future = service.submit(runnable);
-        try{
-            future.get();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
     public void sendscore(int mscore){
         Log.d("asdf", "sendscore");
@@ -365,7 +344,9 @@ public class CSCalFragment extends Fragment {
                 break;
 
             case R.id.start_button:
-                InitServer();
+                Intent intent = new Intent(getActivity(), ChooseCharActivity.class);
+                startActivityForResult(intent, 1111);
+
                 log.clear();
                 data.clear();
                 answer.setText(null);
